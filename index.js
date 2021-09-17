@@ -1,7 +1,7 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
 const app = express();
-const handleEvent = require("../hook/handleEvent");
+const handleEvent = require("./hook/handleEvent");
 const config = require("./config/lineConfig");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
