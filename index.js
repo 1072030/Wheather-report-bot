@@ -21,11 +21,6 @@ app.post("/callback", line.middleware(config), (req, res) => {
     });
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`listening on ${port}`);
-});
-
 function handleEvent(event) {
   if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
     return console.log("Test hook recieved: " + JSON.stringify(event.message));
@@ -34,7 +29,7 @@ function handleEvent(event) {
   switch (event.type) {
     case "message":
       const message = event.message;
-      switch (message.type) {
+      /* switch (message.type) {
         case "text":
           return handleText(message, event.replyToken, event.source);
         case "image":
@@ -49,6 +44,12 @@ function handleEvent(event) {
           return handleSticker(message, event.replyToken);
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
-      }
+      } */
+      console.log(message);
   }
 }
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`listening on ${port}`);
+});
