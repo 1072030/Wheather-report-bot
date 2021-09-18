@@ -21,7 +21,7 @@ app.post("/callback", line.middleware(config), (req, res) => {
     });
 });
 
-function handleEvent(event) {
+const handleEvent = (event) => {
   if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
     return console.log("Test hook recieved: " + JSON.stringify(event.message));
   }
@@ -47,7 +47,7 @@ function handleEvent(event) {
       } */
       console.log(message);
   }
-}
+};
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
