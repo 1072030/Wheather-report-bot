@@ -167,7 +167,10 @@ async function handleText(message, replyToken, source) {
   return await client.replyMessage(replyToken, {
     type: "flex",
     altText: "Test",
-    contents: bubble,
+    contents: {
+      type: "carousel",
+      contents: bubble,
+    },
   });
 }
 const port = process.env.PORT || 3000;
