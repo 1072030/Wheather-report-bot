@@ -2,7 +2,7 @@ const client = require("../config/client");
 const fetchWeather = require("./fetchRequire");
 
 const handleLocation = async (message, replyToken) => {
-  console.log(message);
+  console.log(message.address);
   const LocationName = await fetchWeather();
   console.log(LocationName[0]["Location"]);
   let confirmLocation;
@@ -11,9 +11,10 @@ const handleLocation = async (message, replyToken) => {
       confirmLocation = LocationName[i];
     }
   }
+  console.log(confirmLocation);
   return await client.replyMessage(replyToken, {
     type: "text",
-    text: confirmLocation,
+    text: "test",
   });
 };
 
