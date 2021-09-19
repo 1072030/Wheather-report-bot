@@ -59,6 +59,7 @@ async function handleText(message, replyToken, source) {
   let MinT = [];
   let Pop = [];
   let Weather = [];
+  let location = [];
   let Tomorrow = [];
   let time = [];
   await fetch(
