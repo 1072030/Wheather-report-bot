@@ -7,7 +7,7 @@ const handleLocation = async (message, replyToken) => {
   console.log(LocationName[0]["Location"]);
   let confirmLocation;
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
-    if (message.address.indexOf(LocationName[0]["Location"][i])) {
+    if (message.address.indexOf(LocationName[0]["Location"][i]) != -1) {
       confirmLocation = LocationName[0]["Location"][i];
     }
   }
