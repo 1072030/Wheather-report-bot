@@ -17,7 +17,7 @@ app.get("/", async (_, res) => {
   });
 });
 
-app.post("/callback", line.middleware(config), (req, res) => {
+app.post("/callback", (req, res) => {
   console.log(req);
 });
 function handleEvent(event) {
