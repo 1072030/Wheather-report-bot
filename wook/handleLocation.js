@@ -14,7 +14,27 @@ const handleLocation = async (message, replyToken) => {
   console.log(confirmLocation);
   return await client.replyMessage(replyToken, {
     type: "text",
-    text: "test",
+    text: `您所在區域是${confirmLocation}嗎`,
+    quickReply: {
+      items: [
+        {
+          type: "action",
+          action: {
+            type: "message",
+            label: "是",
+            text: confirmLocation,
+          },
+        },
+        {
+          type: "action",
+          action: {
+            type: "message",
+            label: "不是",
+            text: "重新輸入地區",
+          },
+        },
+      ],
+    },
   });
 };
 
