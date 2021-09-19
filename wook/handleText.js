@@ -1,5 +1,6 @@
 const client = require("../config/client");
 const fetchWeather = require("./fetchRequire");
+const replyPlace = require("./replyPlace");
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();
   switch (message.text) {
@@ -38,12 +39,13 @@ const handleText = async (message, replyToken, source) => {
           url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_3_movie.png",
           size: "full",
           aspectRatio: "20:13",
-          aspectMode: "cover",
+          backgroundColor: "#FFFFFFFF",
           action: {
             type: "uri",
             label: "Action",
             uri: "https://linecorp.com/",
           },
+          position: "absolute",
         },
         body: {
           type: "box",
@@ -199,16 +201,18 @@ const handleText = async (message, replyToken, source) => {
           ],
         },
       });
-    case "市":
-      return await client.replyMessage(replyToken, {
-        type: "text",
-        text: "市",
-      });
     default:
-      return await client.replyMessage(replyToken, {
-        type: "text",
-        text: message.text,
-      });
+      if (
+        message.text.indexOf("縣") != -1 ||
+        message.text.indexOf("市") != -1
+      ) {
+        replyPlace(message.text, replyToken);
+      } else {
+        return await client.replyMessage(replyToken, {
+          type: "text",
+          text: message.text,
+        });
+      }
   }
 };
 
