@@ -39,6 +39,8 @@ function handleEvent(event) {
       switch (message.type) {
         case "text":
           return handleText(message, event.replyToken, event.source);
+        case "location":
+          return handleLocation(message, event.replyToken);
         /*  case "image":
           return handleImage(message, event.replyToken);
         case "video":

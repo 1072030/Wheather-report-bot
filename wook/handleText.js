@@ -143,7 +143,7 @@ const handleText = async (message, replyToken, source) => {
       });
       return await client.replyMessage(replyToken, {
         type: "flex",
-        altText: "Test",
+        altText: "~!今日天氣預報!~ ",
         contents: {
           type: "carousel",
           contents: bubble,

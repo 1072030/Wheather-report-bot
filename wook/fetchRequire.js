@@ -1,6 +1,6 @@
 const fetch = require("node-fetch");
 
-const fetchWeather = async (date) => {
+const fetchWeather = async () => {
   let bubble = [];
   let position = [];
   let MaxT = [];
