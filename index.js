@@ -54,6 +54,12 @@ function handleEvent(event) {
 }
 async function handleText(message, replyToken, source) {
   let bubble = [];
+  let position = [];
+  let MaxT = [];
+  let MinT = [];
+  let Pop = [];
+  let Weather = [];
+  let Tomorrow = [];
   await fetch(
     `https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-E444C840-BB67-49DE-929A-7C987250A02D&downloadType=WEB&format=JSON`,
     {
@@ -67,14 +73,45 @@ async function handleText(message, replyToken, source) {
       return res.json();
     })
     .then((json) => {
-      console.log(json["cwbopendata"]["dataset"]["location"]);
-      for (
-        let i = 0, j = json["cwbopendata"]["dataset"]["location"].length;
-        i < j;
-        i++
-      ) {
-        console.log(console.log(json["cwbopendata"]["dataset"]["location"][i]));
+      let city = json["cwbopendata"]["dataset"]["location"];
+      for (let i = 0, j = city.length; i < j; i++) {
+        position.push(city.locationName);
       }
+      console.log(position);
+      for (let i = 0; i < position.length; i++) {
+        for (let j = 0; j < 4; j++) {
+          //console.log(body['cwbopendata']['dataset']['location'][i]['weatherElement'][j]['time'][0]);
+          if (j == 0) {
+            Weather.push(
+              city[i]["weatherElement"][j]["time"][0]["parameter"][
+                "parameterName"
+              ]
+            );
+          } else if (j == 1) {
+            MaxT.push(
+              city[i]["weatherElement"][j]["time"][0]["parameter"][
+                "parameterName"
+              ]
+            );
+          } else if (j == 2) {
+            MinT.push(
+              city[i]["weatherElement"][j]["time"][0]["parameter"][
+                "parameterName"
+              ]
+            );
+          } else {
+            Pop.push(
+              city[i]["weatherElement"][j + 1]["time"][0]["parameter"][
+                "parameterName"
+              ]
+            );
+          }
+        }
+      }
+      console.log("Weather", Weather);
+      console.log("MaxT", MaxT);
+      console.log("MinT", MinT);
+      console.log("Pop", Pop);
     });
   bubble.push({
     type: "bubble",
