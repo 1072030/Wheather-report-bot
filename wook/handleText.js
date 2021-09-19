@@ -5,7 +5,7 @@ const handleText = async (message, replyToken, source) => {
     case "天氣":
       return await client.replyMessage(replyToken, {
         type: "text",
-        text: "今日天氣預報還是明日天氣預報",
+        text: "今日天氣預報還是查詢地區天氣呢?",
         quickReply: {
           items: [
             {
@@ -20,8 +20,8 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
-                label: "明日天氣預報",
-                text: "明日天氣預報",
+                label: "查詢地區天氣",
+                text: "查詢地區天氣",
               },
             },
           ],
@@ -150,8 +150,38 @@ const handleText = async (message, replyToken, source) => {
         },
       });
 
-    case "明日天氣預報":
-      return await client.replyMessage(replyToken, {});
+    case "查詢地區天氣":
+      return await client.replyMessage(replyToken, {
+        type: "text",
+        text: "選擇查詢區域",
+        quickReply: {
+          items: [
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "台北市",
+                text: "台北市",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "桃園市",
+                text: "桃園市",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "location",
+                label: "傳送位置",
+              },
+            },
+          ],
+        },
+      });
     default:
       return await client.replyMessage(replyToken, {
         type: "text",
