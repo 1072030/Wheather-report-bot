@@ -128,7 +128,6 @@ async function handleText(message, replyToken, source) {
           Pop: Pop,
         }
       );
-      console.log(location);
     }); //end fetch
   bubble.push({
     type: "bubble",
