@@ -81,7 +81,7 @@ async function handleText(message, replyToken, source) {
       }
       console.log(position);
       for (let i = 0, p = position.length; i < p; i++) {
-        for (let j = 0; j < 4; j++) {
+        for (let j = 0; j <= 4; j++) {
           switch (j) {
             case 0:
               Weather.push(
