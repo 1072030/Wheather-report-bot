@@ -113,10 +113,21 @@ async function handleText(message, replyToken, source) {
           }
         }
       }
-      console.log("Weather", Weather);
-      console.log("MaxT", MaxT);
-      console.log("MinT", MinT);
-      console.log("Pop", Pop);
+      location.push(
+        {
+          Weather: Weather,
+        },
+        {
+          MaxT: MaxT,
+        },
+        {
+          MinT: MinT,
+        },
+        {
+          Pop: Pop,
+        }
+      );
+      console.log(location);
     }); //end fetch
   bubble.push({
     type: "bubble",
