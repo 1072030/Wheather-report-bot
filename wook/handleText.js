@@ -152,6 +152,11 @@ const handleText = async (message, replyToken, source) => {
 
     case "明日天氣預報":
       return await client.replyMessage(replyToken, {});
+    default:
+      return await client.replyMessage(replyToken, {
+        type: "text",
+        text: message.text,
+      });
   }
 };
 
