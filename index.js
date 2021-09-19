@@ -19,12 +19,6 @@ app.get("/", async (_, res) => {
 
 app.post("/callback", line.middleware(config), (req, res) => {
   console.log(req);
-  Promise.all(req.body.events.map(handleEvent))
-    .then(() => res.end())
-    .catch((err) => {
-      console.log(err);
-      res.status(500).end();
-    });
 });
 function handleEvent(event) {
   if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
