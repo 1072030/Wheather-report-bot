@@ -29,8 +29,8 @@ const handleLocation = async (message, replyToken) => {
           type: "action",
           action: {
             type: "message",
-            label: "不是",
-            text: "重新輸入地區",
+            label: "不是,重新輸入",
+            text: "天氣",
           },
         },
       ],
