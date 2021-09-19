@@ -27,7 +27,6 @@ const fetchWeather = async () => {
       for (let i = 0, j = city.length; i < j; i++) {
         position.push(city[i].locationName);
       }
-      console.log(position);
       for (let i = 0, p = position.length; i < p; i++) {
         for (let j = 0; j <= 4; j++) {
           switch (j) {
