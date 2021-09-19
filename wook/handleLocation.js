@@ -6,11 +6,14 @@ const handleLocation = async (message, replyToken) => {
   const LocationName = await fetchWeather();
   console.log(LocationName[0]["Location"]);
   let confirmLocation;
-  /* if (LocationName.includes(message.text)) {
-  } */
+  for (let i = 0, j = LocationName.length; i < j; i++) {
+    if (message.address.indexOf(LocationName[i])) {
+      confirmLocation = LocationName[i];
+    }
+  }
   return await client.replyMessage(replyToken, {
     type: "text",
-    text: "test",
+    text: confirmLocation,
   });
 };
 
