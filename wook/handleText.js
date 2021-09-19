@@ -37,7 +37,7 @@ const handleText = async (message, replyToken, source) => {
         hero: {
           type: "image",
           url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_3_movie.png",
-          size: "full",
+          size: "cover",
           aspectRatio: "20:13",
           aspectMode: "fit",
           backgroundColor: "#FFFFFFFF",
