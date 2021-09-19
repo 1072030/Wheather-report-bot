@@ -1,6 +1,7 @@
 const client = require("../config/client");
 const fetchWeather = require("./fetchRequire");
 const handleText = async (message, replyToken, source) => {
+  const LocationName = await fetchWeather();
   switch (message.text) {
     case "天氣":
       return await client.replyMessage(replyToken, {
@@ -159,6 +160,13 @@ const handleText = async (message, replyToken, source) => {
             {
               type: "action",
               action: {
+                type: "location",
+                label: "傳送位置",
+              },
+            },
+            {
+              type: "action",
+              action: {
                 type: "message",
                 label: "台北市",
                 text: "台北市",
@@ -175,12 +183,26 @@ const handleText = async (message, replyToken, source) => {
             {
               type: "action",
               action: {
-                type: "location",
-                label: "傳送位置",
+                type: "message",
+                label: "台中市",
+                text: "台中市",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "臺南市",
+                text: "臺南市",
               },
             },
           ],
         },
+      });
+    case "市":
+      return await client.replyMessage(replyToken, {
+        type: "text",
+        text: "市",
       });
     default:
       return await client.replyMessage(replyToken, {
