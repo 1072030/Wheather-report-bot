@@ -76,7 +76,7 @@ const fetchWeather = async (date) => {
           Pop: Pop,
         }
       );
-      return location;
     });
+  return location;
 };
 module.exports = fetchWeather;
