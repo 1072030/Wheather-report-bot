@@ -75,7 +75,7 @@ async function handleText(message, replyToken, source) {
     .then((json) => {
       let city = json["cwbopendata"]["dataset"]["location"];
       for (let i = 0, j = city.length; i < j; i++) {
-        position.push(city.locationName);
+        position.push(city[i].locationName);
       }
       console.log(position);
       for (let i = 0; i < position.length; i++) {
