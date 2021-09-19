@@ -1,7 +1,6 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
-const fetch = require("node-fetch");
-const fetchWeather = require("./wook/fetchRequire");
+const handleLocation = require("./wook/handleLocation");
 const handleText = require("./wook/handleText");
 const config = {
   channelSecret: "b85d02c4583b0a223741ee0ea2e28c7c",
