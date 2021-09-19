@@ -36,7 +36,7 @@ function handleEvent(event) {
       const message = event.message;
       switch (message.type) {
         case "text":
-          return console.log(message);
+          return handleText(message, event.replyToken, event.source);
         /*  case "image":
           return handleImage(message, event.replyToken);
         case "video":
@@ -52,7 +52,29 @@ function handleEvent(event) {
       }
   }
 }
-
+function handleText(message, replyToken, source) {
+  return client.replyMessage(replyToken, {
+    type: "template",
+    altText: "Buttons alt text",
+    template: {
+      type: "buttons",
+      thumbnailImageUrl: buttonsImageURL,
+      title: "My button sample",
+      text: "Hello, my button",
+      actions: [
+        { label: "Go to line.me", type: "uri", uri: "https://line.me" },
+        { label: "Say hello1", type: "postback", data: "hello こんにちは" },
+        {
+          label: "言 hello2",
+          type: "postback",
+          data: "hello こんにちは",
+          text: "hello こんにちは",
+        },
+        { label: "Say message", type: "message", text: "Rice=米" },
+      ],
+    },
+  });
+}
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
