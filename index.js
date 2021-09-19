@@ -60,6 +60,7 @@ async function handleText(message, replyToken, source) {
   let Pop = [];
   let Weather = [];
   let Tomorrow = [];
+  let time = [];
   await fetch(
     `https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-E444C840-BB67-49DE-929A-7C987250A02D&downloadType=WEB&format=JSON`,
     {
@@ -78,33 +79,37 @@ async function handleText(message, replyToken, source) {
         position.push(city[i].locationName);
       }
       console.log(position);
-      for (let i = 0; i < position.length; i++) {
+      for (let i = 0, p = position.length; i < p; i++) {
         for (let j = 0; j < 4; j++) {
-          //console.log(body['cwbopendata']['dataset']['location'][i]['weatherElement'][j]['time'][0]);
-          if (j == 0) {
-            Weather.push(
-              city[i]["weatherElement"][j]["time"][0]["parameter"][
-                "parameterName"
-              ]
-            );
-          } else if (j == 1) {
-            MaxT.push(
-              city[i]["weatherElement"][j]["time"][0]["parameter"][
-                "parameterName"
-              ]
-            );
-          } else if (j == 2) {
-            MinT.push(
-              city[i]["weatherElement"][j]["time"][0]["parameter"][
-                "parameterName"
-              ]
-            );
-          } else {
-            Pop.push(
-              city[i]["weatherElement"][j + 1]["time"][0]["parameter"][
-                "parameterName"
-              ]
-            );
+          switch (j) {
+            case 0:
+              Weather.push(
+                city[i]["weatherElement"][j]["time"][0]["parameter"][
+                  "parameterName"
+                ]
+              );
+              break;
+            case 1:
+              MaxT.push(
+                city[i]["weatherElement"][j]["time"][0]["parameter"][
+                  "parameterName"
+                ]
+              );
+              break;
+            case 2:
+              MinT.push(
+                city[i]["weatherElement"][j]["time"][0]["parameter"][
+                  "parameterName"
+                ]
+              );
+              break;
+            case 4:
+              Pop.push(
+                city[i]["weatherElement"][j]["time"][0]["parameter"][
+                  "parameterName"
+                ]
+              );
+              break;
           }
         }
       }
@@ -112,7 +117,7 @@ async function handleText(message, replyToken, source) {
       console.log("MaxT", MaxT);
       console.log("MinT", MinT);
       console.log("Pop", Pop);
-    });
+    }); //end fetch
   bubble.push({
     type: "bubble",
     hero: {
