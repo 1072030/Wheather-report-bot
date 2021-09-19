@@ -1,6 +1,6 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
-const fetch = require("fetch");
+const fetch = require("node-fetch");
 const config = {
   channelSecret: "b85d02c4583b0a223741ee0ea2e28c7c",
   channelAccessToken:

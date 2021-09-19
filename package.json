@@ -4,6 +4,7 @@
     "express": "^4.17.1",
     "fetch": "^1.1.0",
     "firebase-admin": "^9.11.1",
+    "node-fetch": "^2.6.2",
     "nodemon": "^2.0.12"
   },
   "name": "weather_report_line_bot",
