@@ -67,7 +67,7 @@ async function handleText(message, replyToken, source) {
       return res.json();
     })
     .then((json) => {
-      console.log(json);
+      console.log(json["cwbopendata"]["dataset"]["location"]);
     });
   bubble.push({
     type: "bubble",
