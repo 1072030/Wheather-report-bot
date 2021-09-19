@@ -38,7 +38,7 @@ const handleText = async (message, replyToken, source) => {
           type: "image",
           url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_3_movie.png",
           size: "full",
-          aspectRatio: "20:13",
+          aspectRatio: "16:9",
           backgroundColor: "#FFFFFFFF",
           action: {
             type: "uri",
