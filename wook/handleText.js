@@ -1,5 +1,4 @@
 const client = require("../config/client");
-const fetch = require("node-fetch");
 const fetchWeather = require("./fetchRequire");
 const handleText = async (message, replyToken, source) => {
   switch (message.text) {
