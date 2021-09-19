@@ -54,7 +54,8 @@ function handleEvent(event) {
   }
 }
 async function handleText(message, replyToken, source) {
-  console.log(fetchWeather(0));
+  let bubble = [];
+  console.log(await fetchWeather(0));
   bubble.push({
     type: "bubble",
     hero: {
