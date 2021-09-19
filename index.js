@@ -1,5 +1,6 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
+const fetch = require("fetch");
 const config = {
   channelSecret: "b85d02c4583b0a223741ee0ea2e28c7c",
   channelAccessToken:
@@ -53,6 +54,21 @@ function handleEvent(event) {
 }
 async function handleText(message, replyToken, source) {
   let bubble = [];
+  await fetch(
+    `https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-E444C840-BB67-49DE-929A-7C987250A02D&downloadType=WEB&format=JSON`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  )
+    .then((res) => {
+      return res.json();
+    })
+    .then((json) => {
+      console.log(json);
+    });
   bubble.push({
     type: "bubble",
     hero: {
