@@ -9,7 +9,7 @@ const client = new line.Client(config);
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.use("/public", express.static("public"));
 app.get("/", async (_, res) => {
   return res.status(200).json({
     status: "success",
@@ -26,8 +26,7 @@ app.post("/callback", line.middleware(config), (req, res) => {
       res.status(500).end();
     });
 });
-
-const handleEvent = (event) => {
+function handleEvent(event) {
   if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
     return console.log("Test hook recieved: " + JSON.stringify(event.message));
   }
@@ -35,10 +34,10 @@ const handleEvent = (event) => {
   switch (event.type) {
     case "message":
       const message = event.message;
-      /* switch (message.type) {
+      switch (message.type) {
         case "text":
-          return handleText(message, event.replyToken, event.source);
-        case "image":
+          return console.log(message.type);
+        /*  case "image":
           return handleImage(message, event.replyToken);
         case "video":
           return handleVideo(message, event.replyToken);
@@ -47,13 +46,12 @@ const handleEvent = (event) => {
         case "location":
           return handleLocation(message, event.replyToken);
         case "sticker":
-          return handleSticker(message, event.replyToken);
+          return handleSticker(message, event.replyToken); */
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
-      } */
-      console.log(message);
+      }
   }
-};
+}
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
