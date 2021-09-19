@@ -63,6 +63,9 @@ const fetchWeather = async () => {
       }
       location.push(
         {
+          Location: position,
+        },
+        {
           Weather: Weather,
         },
         {
