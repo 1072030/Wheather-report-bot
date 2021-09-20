@@ -10,6 +10,7 @@ const firestore = admin.firestore();
 
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();
+  console.log(LocationName);
   console.log(source.userId);
   const firestoreData = await firestore.collection("User").get();
   switch (message.text) {
@@ -224,8 +225,8 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
-                label: "台北市",
-                text: "台北市",
+                label: "臺北市",
+                text: "臺北市",
               },
             },
             {
@@ -265,8 +266,8 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
-                label: "台北市",
-                text: "台北市-設定",
+                label: "臺北市",
+                text: "臺北市-設定",
               },
             },
             {
@@ -297,6 +298,9 @@ const handleText = async (message, replyToken, source) => {
         },
       });
     default:
+      const rand =
+        Math.random().toString(36).substring(2, 20) +
+        Math.random().toString(36).substring(2, 20);
       if (
         message.text.indexOf("縣-設定") != -1 ||
         message.text.indexOf("市-設定") != -1
@@ -309,6 +313,11 @@ const handleText = async (message, replyToken, source) => {
               .collection("User")
               .doc(doc.id)
               .update({ city: data[0] });
+          } else {
+            await firestore
+              .collection("User")
+              .doc(rand)
+              .set({ userId: source.userId, city: data[0] });
           }
         });
         return await client.replyMessage(replyToken, {
