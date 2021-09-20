@@ -1,6 +1,13 @@
 const client = require("../config/client");
 const fetchWeather = require("./fetchRequire");
 const replyPlace = require("./replyPlace");
+const serviceAccount = require("../config/weather-line-bot-1-firebase-adminsdk-0byt9-5ebcd9f602.json");
+const admin = require("firebase-admin");
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+});
+const firestore = admin.firestore();
+const test = await firestore.collection("User").get();
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();
   switch (message.text) {
@@ -31,6 +38,9 @@ const handleText = async (message, replyToken, source) => {
       });
 
     case "今日天氣預報":
+      test.forEach((doc) => {
+        console.log(doc.id, "=>", doc.data());
+      });
       let bubble = [];
       bubble.push({
         type: "bubble",
