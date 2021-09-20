@@ -221,7 +221,7 @@ const handleText = async (message, replyToken, source) => {
       } else {
         return await client.replyMessage(replyToken, {
           type: "text",
-          text: `我不知道${message.text}是什麼意思，可以輸入"天氣"來查詢天氣狀況唷!~`,
+          text: `我不知道"${message.text}"是什麼意思，但是可以輸入"天氣"來查詢天氣狀況唷!~`,
         });
       }
   }
