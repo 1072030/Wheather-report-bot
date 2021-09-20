@@ -369,7 +369,6 @@ const handleText = async (message, replyToken, source) => {
         },
       });
     default:
-      const LocationName = await fetchWeather();
       const firestoreData = await firestore.collection("User").get();
       const rand =
         Math.random().toString(36).substring(2, 18) +
