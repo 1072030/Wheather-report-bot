@@ -31,7 +31,7 @@ const handleText = async (message, replyToken, source) => {
         },
       });
 
-    /* case "今日天氣預報":
+    case "今日天氣預報":
       let isUser = false;
       let bubble = [];
       let confirmLocation = [];
@@ -197,7 +197,7 @@ const handleText = async (message, replyToken, source) => {
           type: "text",
           text: "沒有找到您的資料，重新設定中，輸入'設定'重新設定地區 :)",
         });
-      } */
+      }
 
     case "查詢地區天氣":
       return await client.replyMessage(replyToken, {
@@ -247,7 +247,7 @@ const handleText = async (message, replyToken, source) => {
           ],
         },
       });
-    /* case "設定":
+    case "設定":
       return await client.replyMessage(replyToken, {
         type: "text",
         text: "選擇設定區域",
@@ -256,16 +256,9 @@ const handleText = async (message, replyToken, source) => {
             {
               type: "action",
               action: {
-                type: "location",
-                label: "傳送位置",
-              },
-            },
-            {
-              type: "action",
-              action: {
                 type: "message",
                 label: "台北市",
-                text: "台北市",
+                text: "台北市-設定",
               },
             },
             {
@@ -273,7 +266,7 @@ const handleText = async (message, replyToken, source) => {
               action: {
                 type: "message",
                 label: "桃園市",
-                text: "桃園市",
+                text: "桃園市-設定",
               },
             },
             {
@@ -281,7 +274,7 @@ const handleText = async (message, replyToken, source) => {
               action: {
                 type: "message",
                 label: "台中市",
-                text: "台中市",
+                text: "台中市-設定",
               },
             },
             {
@@ -289,24 +282,19 @@ const handleText = async (message, replyToken, source) => {
               action: {
                 type: "message",
                 label: "臺南市",
-                text: "臺南市",
+                text: "臺南市-設定",
               },
             },
           ],
         },
-      }); */
+      });
     default:
       if (
-        message.text.indexOf("縣") != -1 ||
-        message.text.indexOf("市") != -1
+        message.text.indexOf("縣-設定") != -1 ||
+        message.text.indexOf("市-設定") != -1
       ) {
-        replyPlace(message.text, replyToken);
-      } /* else if (
-        (message.text.indexOf("縣") != -1 ||
-          message.text.indexOf("市") != -1) &&
-        isSetting == true
-      ) {
-        isSetting = false;
+        let data = message.text.split("-");
+        console.log(data);
         firestoreData.forEach(async (doc) => {
           if (doc.data().userId === source.userId) {
             await firestore
@@ -319,7 +307,13 @@ const handleText = async (message, replyToken, source) => {
           type: "text",
           text: `設定成功 !~ 可以輸入 "天氣"重新查詢地區天氣唷~`,
         });
-      } */ else {
+      } else if (
+        message.text.indexOf("縣") != -1 ||
+        message.text.indexOf("市") != -1
+      ) {
+        replyPlace(message.text, replyToken);
+        break;
+      } else {
         return await client.replyMessage(replyToken, {
           type: "text",
           text: `我不知道"${message.text}"是什麼意思，但是可以輸入"天氣"來查詢天氣狀況唷!~`,
