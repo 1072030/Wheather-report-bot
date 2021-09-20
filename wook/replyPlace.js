@@ -13,7 +13,7 @@ const replyPlace = async (Place, replyToken) => {
           name: LocationName[0]["Location"][i],
         },
         {
-          Weather: LocationName[0]["Weatehr"][i],
+          Weather: LocationName[0]["Weather"][i],
         },
         {
           MaxT: LocationName[0]["MaxT"][i],
