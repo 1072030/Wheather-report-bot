@@ -240,8 +240,8 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
-                label: "台中市",
-                text: "台中市",
+                label: "臺中市",
+                text: "臺中市",
               },
             },
             {
@@ -405,7 +405,7 @@ const handleText = async (message, replyToken, source) => {
         } else {
           return client.replyMessage(replyToken, {
             type: "text",
-            text: `沒有這個地區 可能是字打錯囉 請重新設定 要記得加上 -設定 唷~`,
+            text: `沒有搜尋到此區域 可能是字打錯囉 請重新設定 要記得加上 -設定 唷~`,
           });
         }
       } else if (
