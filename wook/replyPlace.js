@@ -3,8 +3,8 @@ const fetchWeather = require("./fetchRequire");
 
 const replyPlace = async (Place, replyToken) => {
   const LocationName = await fetchWeather();
-  console.log(LocationName);
   let confirmLocation = [];
+  let bubble = [];
 
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
     if (Place.indexOf(LocationName[0]["Location"][i]) != -1) {
@@ -28,9 +28,136 @@ const replyPlace = async (Place, replyToken) => {
     }
   }
   console.log(confirmLocation);
+  bubble.push({
+    type: "bubble",
+    body: {
+      type: "box",
+      layout: "vertical",
+      spacing: "md",
+      contents: [
+        {
+          type: "text",
+          text: "天氣預報 : ",
+          weight: "bold",
+          size: "xl",
+          gravity: "center",
+          wrap: true,
+          contents: [],
+        },
+        {
+          type: "box",
+          layout: "vertical",
+          spacing: "sm",
+          margin: "lg",
+          contents: [
+            {
+              type: "box",
+              layout: "baseline",
+              spacing: "sm",
+              contents: [
+                {
+                  type: "text",
+                  text: "日期",
+                  size: "sm",
+                  color: "#AAAAAA",
+                  flex: 2,
+                  contents: [],
+                },
+                {
+                  type: "text",
+                  text: "Monday 25, 9:00PM",
+                  size: "sm",
+                  color: "#666666",
+                  flex: 4,
+                  wrap: true,
+                  contents: [],
+                },
+              ],
+            },
+            {
+              type: "box",
+              layout: "baseline",
+              spacing: "sm",
+              contents: [
+                {
+                  type: "text",
+                  text: "氣溫",
+                  size: "sm",
+                  color: "#AAAAAA",
+                  flex: 2,
+                  contents: [],
+                },
+                {
+                  type: "text",
+                  text: `${confirmLocation[0].MaxT}℃ - ${confirmLocation[0].MinT}℃`,
+                  size: "sm",
+                  color: "#666666",
+                  flex: 4,
+                  wrap: true,
+                  contents: [],
+                },
+              ],
+            },
+            {
+              type: "box",
+              layout: "baseline",
+              spacing: "sm",
+              contents: [
+                {
+                  type: "text",
+                  text: "降雨機率",
+                  size: "sm",
+                  color: "#AAAAAA",
+                  flex: 2,
+                  contents: [],
+                },
+                {
+                  type: "text",
+                  text: `${confirmLocation[0].Pop}%`,
+                  size: "sm",
+                  color: "#666666",
+                  flex: 4,
+                  wrap: true,
+                  contents: [],
+                },
+              ],
+            },
+            {
+              type: "box",
+              layout: "baseline",
+              spacing: "sm",
+              contents: [
+                {
+                  type: "text",
+                  text: "天氣狀況",
+                  size: "sm",
+                  color: "#AAAAAA",
+                  flex: 2,
+                  contents: [],
+                },
+                {
+                  type: "text",
+                  text: `${confirmLocation[0].Weather}`,
+                  size: "sm",
+                  color: "#666666",
+                  flex: 4,
+                  wrap: true,
+                  contents: [],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+  });
   return await client.replyMessage(replyToken, {
-    type: "text",
-    text: "test",
+    type: "flex",
+    altText: "~!今日天氣預報!~ ",
+    contents: {
+      type: "carousel",
+      contents: bubble,
+    },
   });
 };
 
