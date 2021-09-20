@@ -308,7 +308,7 @@ const handleText = async (message, replyToken, source) => {
             await firestore
               .collection("User")
               .doc(doc.id)
-              .update({ city: message.text });
+              .update({ city: data[0] });
           }
         });
         return await client.replyMessage(replyToken, {
