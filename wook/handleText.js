@@ -10,7 +10,7 @@ const firestore = admin.firestore();
 
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();
-  console.log(message);
+  console.log(source);
   const firestoreData = await firestore.collection("User").get();
   switch (message.text) {
     case "天氣":
@@ -40,8 +40,10 @@ const handleText = async (message, replyToken, source) => {
       });
 
     case "今日天氣預報":
+      let isUser = false;
       firestoreData.forEach((doc) => {
         console.log(doc.id, "=>", doc.data());
+        /* if(doc.data().userId === '') */
       });
       let bubble = [];
       bubble.push({
