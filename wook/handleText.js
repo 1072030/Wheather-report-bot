@@ -258,7 +258,7 @@ const handleText = async (message, replyToken, source) => {
     case "設定":
       return await client.replyMessage(replyToken, {
         type: "text",
-        text: "選擇設定區域",
+        text: "選擇設定區域-如果要自行選擇地區 請輸入 '縣市名稱-設定' ",
         quickReply: {
           items: [
             {
@@ -317,14 +317,7 @@ const handleText = async (message, replyToken, source) => {
                 text: "基隆市-設定",
               },
             },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "新竹縣",
-                text: "新竹縣-設定",
-              },
-            },
+
             {
               type: "action",
               action: {
@@ -361,22 +354,6 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
-                label: "雲林縣",
-                text: "雲林縣-設定",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "嘉義縣",
-                text: "嘉義縣-設定",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
                 label: "嘉義市",
                 text: "嘉義市-設定",
               },
@@ -387,54 +364,6 @@ const handleText = async (message, replyToken, source) => {
                 type: "message",
                 label: "屏東縣",
                 text: "屏東縣-設定",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "宜蘭縣",
-                text: "宜蘭縣-設定",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "花蓮縣",
-                text: "花蓮縣-設定",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "臺東縣",
-                text: "臺東縣-設定",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "澎湖縣",
-                text: "澎湖縣-設定",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "金門縣",
-                text: "金門縣-設定",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
-                label: "連江縣",
-                text: "連江縣-設定",
               },
             },
           ],
@@ -448,25 +377,37 @@ const handleText = async (message, replyToken, source) => {
         message.text.indexOf("縣-設定") != -1 ||
         message.text.indexOf("市-設定") != -1
       ) {
+        let isExits = false;
         let data = message.text.split("-");
-        console.log(data);
-        firestoreData.forEach(async (doc) => {
-          if (doc.data().userId === source.userId) {
-            await firestore
-              .collection("User")
-              .doc(doc.id)
-              .update({ city: data[0] });
-          } else {
-            await firestore
-              .collection("User")
-              .doc(rand)
-              .set({ userId: source.userId, city: data[0] });
+        for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
+          if (data[0].indexOf(LocationName[0]["Location"][i]) != -1) {
+            isExits = true;
           }
-        });
-        return await client.replyMessage(replyToken, {
-          type: "text",
-          text: `設定成功 !~ 可以輸入 "天氣"重新查詢地區天氣唷~`,
-        });
+        }
+        if (isExits) {
+          firestoreData.forEach(async (doc) => {
+            if (doc.data().userId === source.userId) {
+              await firestore
+                .collection("User")
+                .doc(doc.id)
+                .update({ city: data[0] });
+            } else {
+              await firestore
+                .collection("User")
+                .doc(rand)
+                .set({ userId: source.userId, city: data[0] });
+            }
+          });
+          return client.replyMessage(replyToken, {
+            type: "text",
+            text: `設定成功 !~ 可以輸入 "天氣"重新查詢地區天氣唷~`,
+          });
+        } else {
+          return client.replyMessage(replyToken, {
+            type: "text",
+            text: `沒有這個地區 可能是字打錯囉 請重新設定 要記得加上 -設定 唷~`,
+          });
+        }
       } else if (
         message.text.indexOf("縣") != -1 ||
         message.text.indexOf("市") != -1
