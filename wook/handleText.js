@@ -10,6 +10,7 @@ const firestore = admin.firestore();
 
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();
+  console.log(message.source);
   const test = await firestore.collection("User").get();
   switch (message.text) {
     case "天氣":
