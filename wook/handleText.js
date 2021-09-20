@@ -23,8 +23,8 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
-                label: "您的地區今日天氣預報",
-                text: "您的地區今日天氣預報",
+                label: "今日天氣預報",
+                text: "今日天氣預報",
               },
             },
             {
