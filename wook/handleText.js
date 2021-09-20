@@ -11,7 +11,7 @@ const firestore = admin.firestore();
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();
   console.log(message.source);
-  const test = await firestore.collection("User").get();
+  const firestoreData = await firestore.collection("User").get();
   switch (message.text) {
     case "天氣":
       return await client.replyMessage(replyToken, {
@@ -40,7 +40,7 @@ const handleText = async (message, replyToken, source) => {
       });
 
     case "今日天氣預報":
-      test.forEach((doc) => {
+      firestoreData.forEach((doc) => {
         console.log(doc.id, "=>", doc.data());
       });
       let bubble = [];
