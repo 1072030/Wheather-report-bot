@@ -34,15 +34,6 @@ const handleText = async (message, replyToken, source) => {
       let bubble = [];
       bubble.push({
         type: "bubble",
-        hero: {
-          type: "image",
-          url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_3_movie.png",
-          size: "full",
-          aspectRatio: "20:13",
-          aspectMode: "cover",
-          backgroundColor: "#FFFFFFFF",
-          position: "absolute",
-        },
         body: {
           type: "box",
           layout: "vertical",
@@ -50,7 +41,7 @@ const handleText = async (message, replyToken, source) => {
           contents: [
             {
               type: "text",
-              text: "BROWN'S ADVENTURE\nIN MOVIE",
+              text: "天氣預報 : ",
               weight: "bold",
               size: "xl",
               gravity: "center",
@@ -70,10 +61,10 @@ const handleText = async (message, replyToken, source) => {
                   contents: [
                     {
                       type: "text",
-                      text: "Date",
+                      text: "日期",
                       size: "sm",
                       color: "#AAAAAA",
-                      flex: 1,
+                      flex: 2,
                       contents: [],
                     },
                     {
@@ -94,10 +85,10 @@ const handleText = async (message, replyToken, source) => {
                   contents: [
                     {
                       type: "text",
-                      text: "Place",
+                      text: "氣溫",
                       size: "sm",
                       color: "#AAAAAA",
-                      flex: 1,
+                      flex: 2,
                       contents: [],
                     },
                     {
@@ -118,10 +109,34 @@ const handleText = async (message, replyToken, source) => {
                   contents: [
                     {
                       type: "text",
-                      text: "Seats",
+                      text: "降雨機率",
                       size: "sm",
                       color: "#AAAAAA",
-                      flex: 1,
+                      flex: 2,
+                      contents: [],
+                    },
+                    {
+                      type: "text",
+                      text: "C Row, 18 Seat",
+                      size: "sm",
+                      color: "#666666",
+                      flex: 4,
+                      wrap: true,
+                      contents: [],
+                    },
+                  ],
+                },
+                {
+                  type: "box",
+                  layout: "baseline",
+                  spacing: "sm",
+                  contents: [
+                    {
+                      type: "text",
+                      text: "天氣狀況",
+                      size: "sm",
+                      color: "#AAAAAA",
+                      flex: 2,
                       contents: [],
                     },
                     {
@@ -206,7 +221,7 @@ const handleText = async (message, replyToken, source) => {
       } else {
         return await client.replyMessage(replyToken, {
           type: "text",
-          text: message.text,
+          text: `我不知道${message.text}是什麼意思，可以輸入"天氣"來查詢天氣狀況唷!~`,
         });
       }
   }
