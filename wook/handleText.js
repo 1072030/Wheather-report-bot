@@ -7,9 +7,10 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
 });
 const firestore = admin.firestore();
-const test = await firestore.collection("User").get();
+
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();
+  const test = await firestore.collection("User").get();
   switch (message.text) {
     case "天氣":
       return await client.replyMessage(replyToken, {
