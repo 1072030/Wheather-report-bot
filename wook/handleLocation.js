@@ -5,6 +5,11 @@ const handleLocation = async (message, replyToken) => {
   const LocationName = await fetchWeather();
   let confirmLocation = [];
   let bubble = [];
+  let today = new Date();
+  let time = [];
+  time.push(today.getMonth() + 1);
+  time.push(today.getDate());
+  time.push(today.getMinutes());
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
     if (message.address.indexOf(LocationName[0]["Location"][i]) != -1) {
       confirmLocation.push({
