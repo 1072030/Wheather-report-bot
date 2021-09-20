@@ -8,11 +8,11 @@ const replyPlace = async (Place, replyToken) => {
 
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
     if (Place.indexOf(LocationName[0]["Location"][i]) != -1) {
-      console.log(LocationName[0]["Location"][i]);
-      console.log(LocationName[0]["Weather"][i]);
-      console.log(LocationName[0]["MaxT"][i]);
+      /* console.log(LocationName[0]["Location"][i]); */
+      console.log(LocationName[0]["Weather"]);
+      /* console.log(LocationName[0]["MaxT"][i]);
       console.log(LocationName[0]["MinT"][i]);
-      console.log(LocationName[0]["Pop"][i]);
+      console.log(LocationName[0]["Pop"][i]); */
       confirmLocation.push(
         {
           name: LocationName[0]["Location"][i],

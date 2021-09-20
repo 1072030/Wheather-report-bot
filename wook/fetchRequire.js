@@ -1,15 +1,12 @@
 const fetch = require("node-fetch");
 
 const fetchWeather = async () => {
-  let bubble = [];
   let position = [];
   let MaxT = [];
   let MinT = [];
   let Pop = [];
   let Weather = [];
   let location = [];
-  let Tomorrow = [];
-  let time = [];
   await fetch(
     `https://opendata.cwb.gov.tw/fileapi/v1/opendataapi/F-C0032-001?Authorization=CWB-E444C840-BB67-49DE-929A-7C987250A02D&downloadType=WEB&format=JSON`,
     {
