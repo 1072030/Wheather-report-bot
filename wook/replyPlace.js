@@ -37,7 +37,7 @@ const replyPlace = async (Place, replyToken) => {
       contents: [
         {
           type: "text",
-          text: "天氣預報 : ",
+          text: `天氣預報 : ${confirmLocation[0].name}`,
           weight: "bold",
           size: "xl",
           gravity: "center",
@@ -89,7 +89,7 @@ const replyPlace = async (Place, replyToken) => {
                 },
                 {
                   type: "text",
-                  text: `${confirmLocation[0].MaxT}℃ - ${confirmLocation[0].MinT}℃`,
+                  text: `${confirmLocation[2].MaxT}℃ - ${confirmLocation[3].MinT}℃`,
                   size: "sm",
                   color: "#666666",
                   flex: 4,
@@ -113,7 +113,7 @@ const replyPlace = async (Place, replyToken) => {
                 },
                 {
                   type: "text",
-                  text: `${confirmLocation[0].Pop}%`,
+                  text: `${confirmLocation[4].Pop}%`,
                   size: "sm",
                   color: "#666666",
                   flex: 4,
@@ -137,7 +137,7 @@ const replyPlace = async (Place, replyToken) => {
                 },
                 {
                   type: "text",
-                  text: `${confirmLocation[0].Weather}`,
+                  text: `${confirmLocation[1].Weather}`,
                   size: "sm",
                   color: "#666666",
                   flex: 4,
