@@ -3,7 +3,11 @@ const fetchWeather = require("./fetchRequire");
 
 const replyPlace = async (Place, replyToken) => {
   const LocationName = await fetchWeather();
-  console.log(LocationName[0].Weather[2]);
+  console.log(LocationName[0].Location);
+  console.log(LocationName[0].Weather);
+  console.log(LocationName[0].MaxT);
+  console.log(LocationName[0].MinT);
+  console.log(LocationName[0].Pop);
   let confirmLocation = [];
 
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
