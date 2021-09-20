@@ -54,6 +54,10 @@ const handleText = async (message, replyToken, source) => {
         }
       });
       if (isUser) {
+        let today = new Date();
+        time.push(today.getMonth() + 1);
+        time.push(today.getDate());
+        time.push(today.getMinutes());
         for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
           if (city.indexOf(LocationName[0]["Location"][i]) != -1) {
             confirmLocation.push({
