@@ -55,6 +55,7 @@ const handleText = async (message, replyToken, source) => {
       });
       if (isUser) {
         let today = new Date();
+        let time = [];
         time.push(today.getMonth() + 1);
         time.push(today.getDate());
         time.push(today.getMinutes());
