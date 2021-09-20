@@ -10,7 +10,7 @@ const replyPlace = async (Place, replyToken) => {
   let Pop;
   let time;
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
-    if (message.address.indexOf(LocationName[0]["Location"][i]) != -1) {
+    if (Place.indexOf(LocationName[0]["Location"][i]) != -1) {
       confirmLocation = LocationName[0]["Location"][i];
       Weather = LocationName[0]["Weatehr"][i];
       MaxT = LocationName[0]["MaxT"][i];
