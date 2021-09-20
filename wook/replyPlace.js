@@ -5,7 +5,10 @@ const replyPlace = async (Place, replyToken) => {
   const LocationName = await fetchWeather();
   let confirmLocation = [];
   let bubble = [];
-
+  let time = [];
+  time.push(today.getMonth() + 1);
+  time.push(today.getDate());
+  time.push(today.getMinutes());
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
     if (Place.indexOf(LocationName[0]["Location"][i]) != -1) {
       confirmLocation.push(
@@ -65,7 +68,7 @@ const replyPlace = async (Place, replyToken) => {
                 },
                 {
                   type: "text",
-                  text: "Monday 25, 9:00PM",
+                  text: `${time[0]}月 ${time[1]}日`,
                   size: "sm",
                   color: "#666666",
                   flex: 4,
