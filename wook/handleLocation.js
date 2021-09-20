@@ -21,7 +21,6 @@ const handleLocation = async (message, replyToken) => {
       });
     }
   }
-  console.log(confirmLocation);
   bubble.push({
     type: "bubble",
     body: {

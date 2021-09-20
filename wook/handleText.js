@@ -44,9 +44,7 @@ const handleText = async (message, replyToken, source) => {
       let confirmLocation = [];
       let city;
       firestoreData.forEach((doc) => {
-        console.log(doc.id, "=>", doc.data());
         if (doc.data().userId === source.userId) {
-          console.log(doc.data());
           isUser = true;
           city = doc.data().city;
         }
