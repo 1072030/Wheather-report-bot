@@ -12,23 +12,13 @@ const replyPlace = async (Place, replyToken) => {
   time.push(today.getMinutes());
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
     if (Place.indexOf(LocationName[0]["Location"][i]) != -1) {
-      confirmLocation.push(
-        {
-          name: LocationName[0]["Location"][i],
-        },
-        {
-          Weather: LocationName[1]["Weather"][i],
-        },
-        {
-          MaxT: LocationName[2]["MaxT"][i],
-        },
-        {
-          MinT: LocationName[3]["MinT"][i],
-        },
-        {
-          Pop: LocationName[4]["Pop"][i],
-        }
-      );
+      confirmLocation.push({
+        name: LocationName[0]["Location"][i],
+        Weather: LocationName[1]["Weather"][i],
+        MaxT: LocationName[2]["MaxT"][i],
+        MinT: LocationName[3]["MinT"][i],
+        Pop: LocationName[4]["Pop"][i],
+      });
     }
   }
   console.log(confirmLocation);
@@ -93,7 +83,7 @@ const replyPlace = async (Place, replyToken) => {
                 },
                 {
                   type: "text",
-                  text: `${confirmLocation[2].MaxT}℃ - ${confirmLocation[3].MinT}℃`,
+                  text: `${confirmLocation[0].MaxT}℃ - ${confirmLocation[0].MinT}℃`,
                   size: "sm",
                   color: "#666666",
                   flex: 4,
@@ -117,7 +107,7 @@ const replyPlace = async (Place, replyToken) => {
                 },
                 {
                   type: "text",
-                  text: `${confirmLocation[4].Pop}%`,
+                  text: `${confirmLocation[0].Pop}%`,
                   size: "sm",
                   color: "#666666",
                   flex: 4,
@@ -141,7 +131,7 @@ const replyPlace = async (Place, replyToken) => {
                 },
                 {
                   type: "text",
-                  text: `${confirmLocation[1].Weather}`,
+                  text: `${confirmLocation[0].Weather}`,
                   size: "sm",
                   color: "#666666",
                   flex: 4,

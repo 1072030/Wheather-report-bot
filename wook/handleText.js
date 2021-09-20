@@ -9,8 +9,9 @@ admin.initializeApp({
 const firestore = admin.firestore();
 
 const handleText = async (message, replyToken, source) => {
+  let isSetting = false;
   const LocationName = await fetchWeather();
-  console.log(source);
+  console.log(source.userId);
   const firestoreData = await firestore.collection("User").get();
   switch (message.text) {
     case "天氣":
@@ -41,142 +42,165 @@ const handleText = async (message, replyToken, source) => {
 
     case "今日天氣預報":
       let isUser = false;
+      let bubble = [];
+      let confirmLocation = [];
+      let city;
       firestoreData.forEach((doc) => {
         console.log(doc.id, "=>", doc.data());
-        /* if(doc.data().userId === '') */
+        if (doc.data().userId === source.userId) {
+          isUser = true;
+          city = doc.data().city;
+        } else {
+          return await client.replyMessage(replyToken, {
+            type: "text",
+            text: "沒有找到您的資料，重新設定中，輸入'設定'重新設定地區 :)",
+          });
+        }
       });
-      let bubble = [];
-      bubble.push({
-        type: "bubble",
-        body: {
-          type: "box",
-          layout: "vertical",
-          spacing: "md",
-          contents: [
-            {
-              type: "text",
-              text: "天氣預報 : ",
-              weight: "bold",
-              size: "xl",
-              gravity: "center",
-              wrap: true,
-              contents: [],
-            },
-            {
-              type: "box",
-              layout: "vertical",
-              spacing: "sm",
-              margin: "lg",
-              contents: [
-                {
-                  type: "box",
-                  layout: "baseline",
-                  spacing: "sm",
-                  contents: [
-                    {
-                      type: "text",
-                      text: "日期",
-                      size: "sm",
-                      color: "#AAAAAA",
-                      flex: 2,
-                      contents: [],
-                    },
-                    {
-                      type: "text",
-                      text: "Monday 25, 9:00PM",
-                      size: "sm",
-                      color: "#666666",
-                      flex: 4,
-                      wrap: true,
-                      contents: [],
-                    },
-                  ],
-                },
-                {
-                  type: "box",
-                  layout: "baseline",
-                  spacing: "sm",
-                  contents: [
-                    {
-                      type: "text",
-                      text: "氣溫",
-                      size: "sm",
-                      color: "#AAAAAA",
-                      flex: 2,
-                      contents: [],
-                    },
-                    {
-                      type: "text",
-                      text: "7 Floor, No.3",
-                      size: "sm",
-                      color: "#666666",
-                      flex: 4,
-                      wrap: true,
-                      contents: [],
-                    },
-                  ],
-                },
-                {
-                  type: "box",
-                  layout: "baseline",
-                  spacing: "sm",
-                  contents: [
-                    {
-                      type: "text",
-                      text: "降雨機率",
-                      size: "sm",
-                      color: "#AAAAAA",
-                      flex: 2,
-                      contents: [],
-                    },
-                    {
-                      type: "text",
-                      text: "C Row, 18 Seat",
-                      size: "sm",
-                      color: "#666666",
-                      flex: 4,
-                      wrap: true,
-                      contents: [],
-                    },
-                  ],
-                },
-                {
-                  type: "box",
-                  layout: "baseline",
-                  spacing: "sm",
-                  contents: [
-                    {
-                      type: "text",
-                      text: "天氣狀況",
-                      size: "sm",
-                      color: "#AAAAAA",
-                      flex: 2,
-                      contents: [],
-                    },
-                    {
-                      type: "text",
-                      text: "C Row, 18 Seat",
-                      size: "sm",
-                      color: "#666666",
-                      flex: 4,
-                      wrap: true,
-                      contents: [],
-                    },
-                  ],
-                },
-              ],
-            },
-          ],
-        },
-      });
-      return await client.replyMessage(replyToken, {
-        type: "flex",
-        altText: "~!今日天氣預報!~ ",
-        contents: {
-          type: "carousel",
-          contents: bubble,
-        },
-      });
+      if (isUser) {
+        for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
+          if (city.indexOf(LocationName[0]["Location"][i]) != -1) {
+            confirmLocation.push({
+              name: LocationName[0]["Location"][i],
+              Weather: LocationName[1]["Weather"][i],
+              MaxT: LocationName[2]["MaxT"][i],
+              MinT: LocationName[3]["MinT"][i],
+              Pop: LocationName[4]["Pop"][i],
+            });
+          }
+        }
+        bubble.push({
+          type: "bubble",
+          body: {
+            type: "box",
+            layout: "vertical",
+            spacing: "md",
+            contents: [
+              {
+                type: "text",
+                text: `天氣預報 : ${confirmLocation[0].name}`,
+                weight: "bold",
+                size: "xl",
+                gravity: "center",
+                wrap: true,
+                contents: [],
+              },
+              {
+                type: "box",
+                layout: "vertical",
+                spacing: "sm",
+                margin: "lg",
+                contents: [
+                  {
+                    type: "box",
+                    layout: "baseline",
+                    spacing: "sm",
+                    contents: [
+                      {
+                        type: "text",
+                        text: "日期",
+                        size: "sm",
+                        color: "#AAAAAA",
+                        flex: 2,
+                        contents: [],
+                      },
+                      {
+                        type: "text",
+                        text: `${time[0]}月 ${time[1]}日`,
+                        size: "sm",
+                        color: "#666666",
+                        flex: 4,
+                        wrap: true,
+                        contents: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: "box",
+                    layout: "baseline",
+                    spacing: "sm",
+                    contents: [
+                      {
+                        type: "text",
+                        text: "氣溫",
+                        size: "sm",
+                        color: "#AAAAAA",
+                        flex: 2,
+                        contents: [],
+                      },
+                      {
+                        type: "text",
+                        text: `${confirmLocation[0].MaxT}℃ - ${confirmLocation[0].MinT}℃`,
+                        size: "sm",
+                        color: "#666666",
+                        flex: 4,
+                        wrap: true,
+                        contents: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: "box",
+                    layout: "baseline",
+                    spacing: "sm",
+                    contents: [
+                      {
+                        type: "text",
+                        text: "降雨機率",
+                        size: "sm",
+                        color: "#AAAAAA",
+                        flex: 2,
+                        contents: [],
+                      },
+                      {
+                        type: "text",
+                        text: `${confirmLocation[0].Pop}%`,
+                        size: "sm",
+                        color: "#666666",
+                        flex: 4,
+                        wrap: true,
+                        contents: [],
+                      },
+                    ],
+                  },
+                  {
+                    type: "box",
+                    layout: "baseline",
+                    spacing: "sm",
+                    contents: [
+                      {
+                        type: "text",
+                        text: "天氣狀況",
+                        size: "sm",
+                        color: "#AAAAAA",
+                        flex: 2,
+                        contents: [],
+                      },
+                      {
+                        type: "text",
+                        text: `${confirmLocation[0].Weather}`,
+                        size: "sm",
+                        color: "#666666",
+                        flex: 4,
+                        wrap: true,
+                        contents: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+        });
+        return await client.replyMessage(replyToken, {
+          type: "flex",
+          altText: "~!今日天氣預報!~ ",
+          contents: {
+            type: "carousel",
+            contents: bubble,
+          },
+        });
+      }
 
     case "查詢地區天氣":
       return await client.replyMessage(replyToken, {
@@ -225,6 +249,11 @@ const handleText = async (message, replyToken, source) => {
             },
           ],
         },
+      });
+    case "設定":
+      return await client.replyMessage(replyToken, {
+        type: "text",
+        text: `我不知道"${message.text}"是什麼意思，但是可以輸入"天氣"來查詢天氣狀況唷!~`,
       });
     default:
       if (
