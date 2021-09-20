@@ -23,6 +23,14 @@ const replyPlace = async (Place, replyToken) => {
   }
   bubble.push({
     type: "bubble",
+    hero: {
+      type: "image",
+      url: "https://scdn.line-apps.com/n/channel_devcenter/img/fx/01_3_movie.png",
+      size: "full",
+      aspectRatio: "20:13",
+      backgroundColor: "#FFFFFFFF",
+      position: "relative",
+    },
     body: {
       type: "box",
       layout: "vertical",
