@@ -10,7 +10,6 @@ const firestore = admin.firestore();
 
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();
-  console.log(LocationName);
   console.log(source.userId);
   const firestoreData = await firestore.collection("User").get();
   switch (message.text) {
@@ -274,6 +273,14 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
+                label: "新北市",
+                text: "新北市-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
                 label: "桃園市",
                 text: "桃園市-設定",
               },
@@ -282,8 +289,8 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
-                label: "台中市",
-                text: "台中市-設定",
+                label: "臺中市",
+                text: "臺中市-設定",
               },
             },
             {
@@ -294,13 +301,149 @@ const handleText = async (message, replyToken, source) => {
                 text: "臺南市-設定",
               },
             },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "高雄市",
+                text: "高雄市-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "基隆市",
+                text: "基隆市-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "新竹縣",
+                text: "新竹縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "新竹市",
+                text: "新竹市-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "苗栗縣",
+                text: "苗栗縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "彰化縣",
+                text: "彰化縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "南投縣",
+                text: "南投縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "雲林縣",
+                text: "雲林縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "嘉義縣",
+                text: "嘉義縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "嘉義市",
+                text: "嘉義市-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "屏東縣",
+                text: "屏東縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "宜蘭縣",
+                text: "宜蘭縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "花蓮縣",
+                text: "花蓮縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "臺東縣",
+                text: "臺東縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "澎湖縣",
+                text: "澎湖縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "金門縣",
+                text: "金門縣-設定",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "連江縣",
+                text: "連江縣-設定",
+              },
+            },
           ],
         },
       });
     default:
       const rand =
-        Math.random().toString(36).substring(2, 20) +
-        Math.random().toString(36).substring(2, 20);
+        Math.random().toString(36).substring(2, 18) +
+        Math.random().toString(36).substring(2, 18);
       if (
         message.text.indexOf("縣-設定") != -1 ||
         message.text.indexOf("市-設定") != -1
