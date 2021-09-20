@@ -4,7 +4,7 @@ const fetchWeather = require("./fetchRequire");
 const replyPlace = async (Place, replyToken) => {
   const LocationName = await fetchWeather();
   console.log(LocationName[0].Location);
-  console.log(LocationName[0]);
+  console.log(LocationName[1]);
   /* console.log(LocationName[0]);
   console.log(LocationName[0]);
   console.log(LocationName[0]); */
