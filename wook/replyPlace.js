@@ -6,6 +6,7 @@ const replyPlace = async (Place, replyToken) => {
   let confirmLocation = [];
   let bubble = [];
   let time = [];
+  let today = new Date();
   time.push(today.getMonth() + 1);
   time.push(today.getDate());
   time.push(today.getMinutes());
