@@ -9,7 +9,6 @@ admin.initializeApp({
 const firestore = admin.firestore();
 
 const handleText = async (message, replyToken, source) => {
-  let isSetting = false;
   const LocationName = await fetchWeather();
   console.log(source.userId);
   const firestoreData = await firestore.collection("User").get();
@@ -24,14 +23,6 @@ const handleText = async (message, replyToken, source) => {
               type: "action",
               action: {
                 type: "message",
-                label: "今日天氣預報",
-                text: "今日天氣預報",
-              },
-            },
-            {
-              type: "action",
-              action: {
-                type: "message",
                 label: "查詢地區天氣",
                 text: "查詢地區天氣",
               },
@@ -40,7 +31,7 @@ const handleText = async (message, replyToken, source) => {
         },
       });
 
-    case "今日天氣預報":
+    /* case "今日天氣預報":
       let isUser = false;
       let bubble = [];
       let confirmLocation = [];
@@ -206,7 +197,7 @@ const handleText = async (message, replyToken, source) => {
           type: "text",
           text: "沒有找到您的資料，重新設定中，輸入'設定'重新設定地區 :)",
         });
-      }
+      } */
 
     case "查詢地區天氣":
       return await client.replyMessage(replyToken, {
@@ -256,8 +247,7 @@ const handleText = async (message, replyToken, source) => {
           ],
         },
       });
-    case "設定":
-      isSetting = true;
+    /* case "設定":
       return await client.replyMessage(replyToken, {
         type: "text",
         text: "選擇設定區域",
@@ -304,15 +294,14 @@ const handleText = async (message, replyToken, source) => {
             },
           ],
         },
-      });
+      }); */
     default:
       if (
-        (message.text.indexOf("縣") != -1 ||
-          message.text.indexOf("市") != -1) &&
-        isSetting == false
+        message.text.indexOf("縣") != -1 ||
+        message.text.indexOf("市") != -1
       ) {
         replyPlace(message.text, replyToken);
-      } else if (
+      } /* else if (
         (message.text.indexOf("縣") != -1 ||
           message.text.indexOf("市") != -1) &&
         isSetting == true
@@ -330,7 +319,7 @@ const handleText = async (message, replyToken, source) => {
           type: "text",
           text: `設定成功 !~ 可以輸入 "天氣"重新查詢地區天氣唷~`,
         });
-      } else {
+      } */ else {
         return await client.replyMessage(replyToken, {
           type: "text",
           text: `我不知道"${message.text}"是什麼意思，但是可以輸入"天氣"來查詢天氣狀況唷!~`,
