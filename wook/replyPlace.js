@@ -8,6 +8,7 @@ const replyPlace = async (Place, replyToken) => {
   let MaxT;
   let MinT;
   let Pop;
+  let time;
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
     if (message.address.indexOf(LocationName[0]["Location"][i]) != -1) {
       confirmLocation = LocationName[0]["Location"][i];
@@ -17,7 +18,10 @@ const replyPlace = async (Place, replyToken) => {
       Pop = LocationName[0]["Pop"][i];
     }
   }
-  return await client.replyMessage(replyToken, {});
+  return await client.replyMessage(replyToken, {
+    type: "text",
+    text: "test",
+  });
 };
 
 module.exports = replyPlace;
