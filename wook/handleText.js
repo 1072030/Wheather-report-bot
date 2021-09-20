@@ -257,16 +257,79 @@ const handleText = async (message, replyToken, source) => {
         },
       });
     case "設定":
+      isSetting = true;
       return await client.replyMessage(replyToken, {
         type: "text",
-        text: `我不知道"${message.text}"是什麼意思，但是可以輸入"天氣"來查詢天氣狀況唷!~`,
+        text: "選擇設定區域",
+        quickReply: {
+          items: [
+            {
+              type: "action",
+              action: {
+                type: "location",
+                label: "傳送位置",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "台北市",
+                text: "台北市",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "桃園市",
+                text: "桃園市",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "台中市",
+                text: "台中市",
+              },
+            },
+            {
+              type: "action",
+              action: {
+                type: "message",
+                label: "臺南市",
+                text: "臺南市",
+              },
+            },
+          ],
+        },
       });
     default:
       if (
-        message.text.indexOf("縣") != -1 ||
-        message.text.indexOf("市") != -1
+        (message.text.indexOf("縣") != -1 ||
+          message.text.indexOf("市") != -1) &&
+        isSetting == false
       ) {
         replyPlace(message.text, replyToken);
+      } else if (
+        (message.text.indexOf("縣") != -1 ||
+          message.text.indexOf("市") != -1) &&
+        isSetting == true
+      ) {
+        isSetting = false;
+        firestoreData.forEach(async (doc) => {
+          if (doc.data().userId === source.userId) {
+            await firestore
+              .collection("User")
+              .doc(doc.id)
+              .update({ city: message.text });
+          }
+        });
+        return await client.replyMessage(replyToken, {
+          type: "text",
+          text: `設定成功 !~ 可以輸入 "天氣"重新查詢地區天氣唷~`,
+        });
       } else {
         return await client.replyMessage(replyToken, {
           type: "text",
