@@ -45,16 +45,11 @@ const handleText = async (message, replyToken, source) => {
       let bubble = [];
       let confirmLocation = [];
       let city;
-      firestoreData.forEach((doc) => {
+      firestoreData.forEach(async (doc) => {
         console.log(doc.id, "=>", doc.data());
         if (doc.data().userId === source.userId) {
           isUser = true;
           city = doc.data().city;
-        } else {
-          return await client.replyMessage(replyToken, {
-            type: "text",
-            text: "沒有找到您的資料，重新設定中，輸入'設定'重新設定地區 :)",
-          });
         }
       });
       if (isUser) {
@@ -199,6 +194,11 @@ const handleText = async (message, replyToken, source) => {
             type: "carousel",
             contents: bubble,
           },
+        });
+      } else {
+        return client.replyMessage(replyToken, {
+          type: "text",
+          text: "沒有找到您的資料，重新設定中，輸入'設定'重新設定地區 :)",
         });
       }
 
