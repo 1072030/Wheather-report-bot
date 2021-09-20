@@ -3,12 +3,9 @@ const fetchWeather = require("./fetchRequire");
 
 const replyPlace = async (Place, replyToken) => {
   const LocationName = await fetchWeather();
+  console.log(LocationName);
   let confirmLocation = [];
-  let Weather;
-  let MaxT;
-  let MinT;
-  let Pop;
-  let time;
+
   for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
     if (Place.indexOf(LocationName[0]["Location"][i]) != -1) {
       confirmLocation.push(
