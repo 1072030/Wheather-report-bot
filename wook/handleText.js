@@ -367,6 +367,7 @@ const handleText = async (message, replyToken, source) => {
         },
       });
     default:
+      const LocationNamE = await fetchWeather();
       const rand =
         Math.random().toString(36).substring(2, 18) +
         Math.random().toString(36).substring(2, 18);
@@ -376,8 +377,8 @@ const handleText = async (message, replyToken, source) => {
       ) {
         let isExits = false;
         let data = message.text.split("-");
-        for (let i = 0, j = LocationName[0]["Location"].length; i < j; i++) {
-          if (data[0].indexOf(LocationName[0]["Location"][i]) != -1) {
+        for (let i = 0, j = LocationNamE[0]["Location"].length; i < j; i++) {
+          if (data[0].indexOf(LocationNamE[0]["Location"][i]) != -1) {
             isExits = true;
           }
         }
