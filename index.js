@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/public", express.static("public"));
 app.get("/", async (_, res) => {
+  console.log("test");
   return res.status(200).json({
     status: "success",
     message: "Connected successfully!",
