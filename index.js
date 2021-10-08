@@ -42,6 +42,11 @@ function handleEvent(event) {
           return handleText(message, event.replyToken, event.source);
         case "location":
           return handleLocation(message, event.replyToken);
+        case "beacon":
+          return client.replyMessage(event.replyToken, {
+            type: "text",
+            text: `Got beacon: ${event.beacon.hwid}`,
+          });
         /*  case "image":
           return handleImage(message, event.replyToken);
         case "video":
