@@ -29,6 +29,7 @@ app.post("/callback", (req, res) => {
 });
 function handleEvent(event) {
   if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
+    console.log(event.type);
     return console.log("Test hook recieved: " + JSON.stringify(event.message));
   }
 
