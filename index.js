@@ -20,6 +20,7 @@ app.get("/", async (_, res) => {
 });
 
 app.post("/callback", (req, res) => {
+  console.log(req.body.events);
   Promise.all(req.body.events.map(handleEvent))
     .then(() => res.end())
     .catch((err) => {
@@ -41,8 +42,6 @@ function handleEvent(event) {
           return handleText(message, event.replyToken, event.source);
         case "location":
           return handleLocation(message, event.replyToken);
-        case "beacon":
-          return handleBeacon(message, event.replyToken);
         /*  case "image":
           return handleImage(message, event.replyToken);
         case "video":
