@@ -28,8 +28,8 @@ app.post("/callback", (req, res) => {
     });
 });
 function handleEvent(event) {
+  console.log(event.type);
   if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
-    console.log(event.type);
     return console.log("Test hook recieved: " + JSON.stringify(event.message));
   }
 
@@ -41,6 +41,8 @@ function handleEvent(event) {
           return handleText(message, event.replyToken, event.source);
         case "location":
           return handleLocation(message, event.replyToken);
+        case "beacon":
+          return handleBeacon(message, event.replyToken);
         /*  case "image":
           return handleImage(message, event.replyToken);
         case "video":
