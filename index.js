@@ -20,8 +20,18 @@ app.get("/", async (_, res) => {
   });
 });
 EddystoneBeaconScanner.on("found", function (beacon) {
-  console.log(beacon);
+  console.log("found Eddystone Beacon:\n", JSON.stringify(beacon, null, 2));
 });
+
+EddystoneBeaconScanner.on("updated", function (beacon) {
+  console.log("updated Eddystone Beacon:\n", JSON.stringify(beacon, null, 2));
+});
+
+EddystoneBeaconScanner.on("lost", function (beacon) {
+  console.log("lost Eddystone beacon:\n", JSON.stringify(beacon, null, 2));
+});
+
+EddystoneBeaconScanner.startScanning(true);
 app.post("/callback", (req, res) => {
   console.log(req.body.events, "ts");
   Promise.all(req.body.events.map(handleEvent))
