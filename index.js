@@ -1,7 +1,7 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
-const handleLocation = require("./wook/handleLocation");
-const handleText = require("./wook/handleText");
+const handleEvent = require("./wook/handleEvent");
+const bleno = require("bleno");
 const config = {
   channelSecret: "b85d02c4583b0a223741ee0ea2e28c7c",
   channelAccessToken:
@@ -19,7 +19,15 @@ app.get("/", async (_, res) => {
     message: "Connected successfully!",
   });
 });
-
+bleno.on("stateChange", (status) => {
+  console.log("status", status);
+  if (state === "poweredOn") {
+    console.log(data);
+    bleno.startAdvertisingWithEIRData(data);
+  } else {
+    bleno.stopAdvertising();
+  }
+});
 app.post("/callback", (req, res) => {
   console.log(req.body.events);
   Promise.all(req.body.events.map(handleEvent))
@@ -29,40 +37,7 @@ app.post("/callback", (req, res) => {
       res.status(500).end();
     });
 });
-function handleEvent(event) {
-  console.log(event.type);
-  if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
-    return console.log("Test hook recieved: " + JSON.stringify(event.message));
-  }
 
-  switch (event.type) {
-    case "message":
-      const message = event.message;
-      switch (message.type) {
-        case "text":
-          return handleText(message, event.replyToken, event.source);
-        case "location":
-          return handleLocation(message, event.replyToken);
-        case "beacon":
-          return client.replyMessage(event.replyToken, {
-            type: "text",
-            text: `Got beacon: ${event.beacon.hwid}`,
-          });
-        /*  case "image":
-          return handleImage(message, event.replyToken);
-        case "video":
-          return handleVideo(message, event.replyToken);
-        case "audio":
-          return handleAudio(message, event.replyToken);
-        case "location":
-          return handleLocation(message, event.replyToken);
-        case "sticker":
-          return handleSticker(message, event.replyToken); */
-        default:
-          throw new Error(`Unknown message: ${JSON.stringify(message)}`);
-      }
-  }
-}
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`listening on ${port}`);
