@@ -1,7 +1,7 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
 const handleEvent = require("./wook/handleEvent");
-const bleno = require("bleno");
+const EddystoneBeaconScanner = require("eddystone-beacon-scanner");
 const config = {
   channelSecret: "b85d02c4583b0a223741ee0ea2e28c7c",
   channelAccessToken:
@@ -19,12 +19,8 @@ app.get("/", async (_, res) => {
     message: "Connected successfully!",
   });
 });
-bleno.on("stateChange", (status) => {
-  console.log("status", status);
-  if (state === "poweredOn") {
-  } else {
-    bleno.stopAdvertising();
-  }
+EddystoneBeaconScanner.on("found", function (beacon) {
+  console.log(beacon);
 });
 app.post("/callback", (req, res) => {
   console.log(req.body.events, "ts");
