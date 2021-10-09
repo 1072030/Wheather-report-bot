@@ -22,7 +22,6 @@ app.get("/", async (_, res) => {
 bleno.on("stateChange", (status) => {
   console.log("status", status);
   if (state === "poweredOn") {
-    bleno.startAdvertisingWithEIRData(data);
   } else {
     bleno.stopAdvertising();
   }
