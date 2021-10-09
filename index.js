@@ -27,7 +27,7 @@ bleno.on("stateChange", (status) => {
   }
 });
 app.post("/callback", (req, res) => {
-  console.log(req.body.events);
+  console.log(req.body.events, "ts");
   Promise.all(req.body.events.map(handleEvent))
     .then(() => res.end())
     .catch((err) => {
