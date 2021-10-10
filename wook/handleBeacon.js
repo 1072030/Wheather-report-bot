@@ -1,8 +1,3 @@
-const handleBeacon = async (replyToken) => {
-  await client.replyMessage(replyToken, {
-    type: "test",
-    text: "Hello, world 1",
-  });
-};
+const handleBeacon = async (replyToken) => {};
 
 module.exports = handleBeacon;

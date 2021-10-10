@@ -2,7 +2,6 @@ const client = require("../config/client");
 const handleLocation = require("../wook/handleLocation");
 const handleText = require("../wook/handleText");
 const handleEvent = async (event) => {
-  console.log(event.type);
   if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {
     return console.log("Test hook recieved: " + JSON.stringify(event.message));
   }
@@ -29,6 +28,7 @@ const handleEvent = async (event) => {
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
     case "beacon":
+      console.log(event.beacon);
       return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
   }
 };
