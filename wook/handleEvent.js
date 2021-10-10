@@ -1,3 +1,4 @@
+const client = require("../config/client");
 const handleLocation = require("../wook/handleLocation");
 const handleText = require("../wook/handleText");
 const handleEvent = async (event) => {
@@ -28,7 +29,7 @@ const handleEvent = async (event) => {
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
     case "beacon":
-      return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
+      return handleBeacon(event.replyToken);
   }
 };
 
