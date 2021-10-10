@@ -16,8 +16,8 @@ const handleBeacon = async (source, replyToken) => {
   });
   console.log(source);
   await client.replyMessage(replyToken, {
-    altText: "no",
     type: "text",
+    altText: "no",
     text: "hello",
   });
 };
