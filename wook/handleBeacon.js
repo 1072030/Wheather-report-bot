@@ -1,6 +1,6 @@
 const client = require("../config/client");
 const firestore = require("../config/firebaseConfig");
-const beaconTypeConfirm = require("../beaconReply");
+const beaconTypeConfirm = require("../beaconReply/confirm");
 const handleBeacon = async (source, replyToken) => {
   const firestoreData = await firestore.collection("BeaconTest").get();
   // firestoreData.forEach(async (doc) => {
