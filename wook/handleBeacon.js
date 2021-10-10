@@ -1,24 +1,39 @@
 const client = require("../config/client");
 const firestore = require("../config/firebaseConfig");
+const beaconTypeConfirm = require("../beaconReply");
 const handleBeacon = async (source, replyToken) => {
   const firestoreData = await firestore.collection("BeaconTest").get();
-  firestoreData.forEach(async (doc) => {
-    if (doc.data().BeaconId === parseInt(source.beacon.dm)) {
-      console.log(doc.data().BeaconId);
-      console.log("this id is match");
-      // await firestore
-      //   .collection("BeaconTest")
-      //   .doc(doc.id)
-      //   .update({ city: data[0] });
-    } else {
-      console.log("this id doesn't match");
-    }
-  });
-  console.log(source);
+  // firestoreData.forEach(async (doc) => {
+  //   if (doc.data().BeaconId === parseInt(source.beacon.dm)) {
+  //     switch (doc.data().type) {
+  //       case "text":
+  //         return;
+  //       case "image":
+  //         return;
+  //       case "confirm":
+  //         return beaconTypeConfirm(source, replyToken);
+  //     }
+  //   }
+  // });
   await client.replyMessage(replyToken, {
-    type: "text",
-    altText: "no",
-    text: "hello",
+    type: "template",
+    altText: "this is a confirm template",
+    template: {
+      type: "confirm",
+      actions: [
+        {
+          type: "uri",
+          label: "是",
+          uri: "https://bootstrap5.hexschool.com/docs/5.0/forms/input-group/",
+        },
+        {
+          type: "message",
+          label: "否",
+          text: "否",
+        },
+      ],
+      text: "您確定嗎？",
+    },
   });
 };
 

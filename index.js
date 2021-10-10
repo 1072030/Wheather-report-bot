@@ -1,7 +1,7 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
 const handleEvent = require("./wook/handleEvent");
-
+const firestore = require("./config/firebaseConfig");
 const config = {
   channelSecret: "b85d02c4583b0a223741ee0ea2e28c7c",
   channelAccessToken:
@@ -11,9 +11,24 @@ const client = new line.Client(config);
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use("/public", express.static("public"));
+app.use("/", express.static("public"));
 app.get("/", async (_, res) => {
-  console.log("test");
+  return res.status(200).json({
+    status: "success",
+    message: "Connected successfully!",
+  });
+});
+
+app.post("/beacon", async (req, res) => {
+  const firestoreData = await firestore.collection("BeaconTest").get();
+  firestoreData.forEach(async (doc) => {
+    if (doc.data().BeaconId === req.body.hwid) {
+      // await firestore
+      //   .collection("BeaconTest")
+      //   .doc(doc.id)
+      //   .update({ city: data[0] });
+    }
+  });
   return res.status(200).json({
     status: "success",
     message: "Connected successfully!",
