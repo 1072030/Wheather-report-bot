@@ -10,6 +10,7 @@ const beaconTypeConfirm = async (source, replyToken) => {
       });
     }
   });
+  console.log(data);
   await client.replyMessage(replyToken, {
     type: "text",
     text: data[0].text,
