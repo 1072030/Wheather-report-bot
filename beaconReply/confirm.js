@@ -19,11 +19,11 @@ const beaconTypeConfirm = async (source, replyToken) => {
           label: "是",
           uri: "https://bootstrap5.hexschool.com/docs/5.0/forms/input-group/",
         },
-        // {
-        //   type: "message",
-        //   label: "否",
-        //   text: "否",
-        // },
+        {
+          type: "message",
+          label: "否",
+          text: "否",
+        },
       ],
       text: "您確定嗎？",
     },
