@@ -14,11 +14,6 @@ const handleEvent = async (event) => {
           return handleText(message, event.replyToken, event.source);
         case "location":
           return handleLocation(message, event.replyToken);
-        case "beacon":
-          return client.replyMessage(event.replyToken, {
-            type: "text",
-            text: `Got beacon: ${event.beacon.hwid}`,
-          });
         /*  case "image":
             return handleImage(message, event.replyToken);
           case "video":
@@ -32,6 +27,8 @@ const handleEvent = async (event) => {
         default:
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
+    case "beacon":
+      return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
   }
 };
 
