@@ -1,7 +1,7 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
 const handleEvent = require("./wook/handleEvent");
-const EddystoneBeaconScanner = require("eddystone-beacon-scanner");
+
 const config = {
   channelSecret: "b85d02c4583b0a223741ee0ea2e28c7c",
   channelAccessToken:
@@ -18,17 +18,6 @@ app.get("/", async (_, res) => {
     status: "success",
     message: "Connected successfully!",
   });
-});
-EddystoneBeaconScanner.on("found", function (beacon) {
-  console.log("found Eddystone Beacon:\n", JSON.stringify(beacon, null, 2));
-});
-
-EddystoneBeaconScanner.on("updated", function (beacon) {
-  console.log("updated Eddystone Beacon:\n", JSON.stringify(beacon, null, 2));
-});
-
-EddystoneBeaconScanner.on("lost", function (beacon) {
-  console.log("lost Eddystone beacon:\n", JSON.stringify(beacon, null, 2));
 });
 
 EddystoneBeaconScanner.startScanning(true);
