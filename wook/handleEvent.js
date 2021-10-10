@@ -29,8 +29,15 @@ const handleEvent = async (event) => {
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
     case "beacon":
-      return handleBeacon(event.replyToken);
+      return replyText(event.replyToken, `Got beacon: ${event.beacon.hwid}`);
   }
+};
+const replyText = (token, texts) => {
+  texts = Array.isArray(texts) ? texts : [texts];
+  return client.replyMessage(
+    token,
+    texts.map((text) => ({ type: "text", text }))
+  );
 };
 
 module.exports = handleEvent;
