@@ -20,7 +20,6 @@ app.get("/", async (_, res) => {
   });
 });
 
-EddystoneBeaconScanner.startScanning(true);
 app.post("/callback", (req, res) => {
   console.log(req.body.events, "ts");
   Promise.all(req.body.events.map(handleEvent))
