@@ -21,7 +21,6 @@ app.get("/", async (_, res) => {
 });
 
 app.post("/callback", (req, res) => {
-  console.log(req.body.events, "ts");
   Promise.all(req.body.events.map(handleEvent))
     .then(() => res.end())
     .catch((err) => {
