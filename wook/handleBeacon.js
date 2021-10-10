@@ -3,6 +3,7 @@ const firestore = require("../config/firebaseConfig");
 const handleBeacon = async (source, replyToken) => {
   const firestoreData = await firestore.collection("BeaconTest").get();
   firestoreData.forEach(async (doc) => {
+    console.log(doc.data().beaconId);
     if (doc.data().beaconId === source.beacon.dm) {
       console.log("this id is match");
       // await firestore
@@ -13,7 +14,7 @@ const handleBeacon = async (source, replyToken) => {
       console.log("this id doesn't match");
     }
   });
-  console.log(contents);
+  console.log(source);
   // await client.replyMessage(replyToken, {
   //   type: "text",
   //   text: "hello",
