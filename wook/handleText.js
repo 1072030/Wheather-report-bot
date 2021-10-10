@@ -1,12 +1,7 @@
 const client = require("../config/client");
 const fetchWeather = require("./fetchRequire");
 const replyPlace = require("./replyPlace");
-const serviceAccount = require("../config/weather-line-bot-1-firebase-adminsdk-0byt9-5ebcd9f602.json");
-const admin = require("firebase-admin");
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
-const firestore = admin.firestore();
+const firestore = require("../config/firebaseConfig");
 
 const handleText = async (message, replyToken, source) => {
   const LocationName = await fetchWeather();

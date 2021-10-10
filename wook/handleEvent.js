@@ -29,7 +29,7 @@ const handleEvent = async (event) => {
           throw new Error(`Unknown message: ${JSON.stringify(message)}`);
       }
     case "beacon":
-      return handleBeacon(event.beacon, event.replyToken);
+      return handleBeacon(event, event.replyToken);
   }
 };
 
