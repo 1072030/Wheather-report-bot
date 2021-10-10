@@ -1,6 +1,7 @@
 const client = require("../config/client");
 const firestore = require("../config/firebaseConfig");
-const beaconTypeConfirm = require("../beaconReply/confirm");
+const beaconTypeConfirm = require("../beaconReply/typeConfirm");
+const beaconTypeText = require("../beaconReply/typeText");
 const handleBeacon = async (source, replyToken) => {
   console.log(source.beacon);
   const firestoreData = await firestore.collection("BeaconTest").get();
@@ -9,7 +10,7 @@ const handleBeacon = async (source, replyToken) => {
       console.log(doc.data().type);
       switch (doc.data().type) {
         case "text":
-          return;
+          return beaconTypeText(source, replyToken);
         case "image":
           return;
         case "confirm":
@@ -17,11 +18,6 @@ const handleBeacon = async (source, replyToken) => {
       }
     }
   });
-  // await client.replyMessage(replyToken, {
-  //   type: "text",
-  //   altText: "no",
-  //   text: "hello",
-  // });
 };
 
 module.exports = handleBeacon;
