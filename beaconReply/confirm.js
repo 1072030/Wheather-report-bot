@@ -1,5 +1,5 @@
 const firestore = require("../config/firebaseConfig");
-const confirm = async (source, replyToken) => {
+const beaconTypeConfirm = async (source, replyToken) => {
   const firestoreData = await firestore.collection("BeaconTest").get();
   let data = [];
   firestoreData.forEach(async (doc) => {
@@ -28,4 +28,4 @@ const confirm = async (source, replyToken) => {
     },
   });
 };
-module.exports = confirm;
+module.exports = beaconTypeConfirm;

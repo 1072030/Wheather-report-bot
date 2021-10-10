@@ -15,11 +15,11 @@ const handleBeacon = async (source, replyToken) => {
       }
     }
   });
-  // await client.replyMessage(replyToken, {
-  //   type: "text",
-  //   altText: "no",
-  //   text: "hello",
-  // });
+  await client.replyMessage(replyToken, {
+    type: "text",
+    altText: "no",
+    text: "hello",
+  });
 };
 
 module.exports = handleBeacon;
