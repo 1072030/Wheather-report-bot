@@ -4,7 +4,7 @@ const beaconTypeConfirm = async (source, replyToken) => {
   const firestoreData = await firestore.collection("BeaconTest").get();
   let data = [];
   firestoreData.forEach(async (doc) => {
-    if (doc.data().beaconId === parseInt(source.beacon.dm)) {
+    if (doc.data().beaconId === source.beacon.dm) {
       data.push({
         text: doc.data().text,
       });
