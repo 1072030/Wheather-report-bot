@@ -14,14 +14,48 @@ $(document).ready(() => {
       DisplayShow("#textTemplate");
       DisplayHide("#confirmTemplate");
       DisplayHide("#imageTemplate");
+      DisplayHide("#imageCarouselTemplate");
     } else if ($("#Type option:selected").val() === "image") {
       DisplayShow("#imageTemplate");
       DisplayHide("#textTemplate");
       DisplayHide("#confirmTemplate");
+      DisplayHide("#imageCarouselTemplate");
     } else if ($("#Type option:selected").val() === "confirm") {
       DisplayShow("#confirmTemplate");
       DisplayHide("#textTemplate");
       DisplayHide("#imageTemplate");
+      DisplayHide("#imageCarouselTemplate");
+    } else if ($("#Type option:selected").val() === "imageCarousel") {
+      DisplayShow("#imageCarouselTemplate");
+      DisplayHide("#confirmTemplate");
+      DisplayHide("#textTemplate");
+      DisplayHide("#imageTemplate");
+    }
+  });
+  $("#numberOfPicture").click(() => {
+    const number = parseInt($("#numberOfPicture option:selected").val());
+    console.log(number);
+  });
+  $(".replyMessageType").click(() => {
+    var index = $(".replyMessageType").index();
+    console.log($(".replyMessageType").val());
+    if (
+      $("#imageCarouselTemplate").find(".replyMessageType").get(index).value ==
+      "text"
+    ) {
+      $("#imageCarouselTemplate").find(".action_textReply")[
+        index
+      ].style.display = "block";
+      $("#imageCarouselTemplate").find(".action_UriReply")[
+        index
+      ].style.display = "none";
+    } else if ($(".replyMessageType").get(index).value == "uri") {
+      $("#imageCarouselTemplate").find(".action_textReply")[
+        index
+      ].style.display = "none";
+      $("#imageCarouselTemplate").find(".action_UriReply")[
+        index
+      ].style.display = "block";
     }
   });
 
@@ -61,8 +95,13 @@ $(document).ready(() => {
         text: $("#TextMessage").val(),
       };
       api(uri, data);
-    } else if ($("#Type option:selected").val() === "image") {
-      api(uri, data);
+    } else if ($("#Type option:selected").val() === "imageCarousel") {
+      let data = {
+        beaconId: document.getElementById("hwid").value,
+        type: $("#Type option:selected").val(),
+        //altText:
+      };
+      // api(uri, data);
     }
   });
   const api = async (url, data) => {
@@ -80,9 +119,6 @@ $(document).ready(() => {
       .then((result) => {
         console.log(result);
         $(".ReturnMessage").html(`${result.message}`);
-        // for (var i = 0, len = items.length; i < len; i++) {
-        //   items[i].innerHTML = `<span>${result.message}</span>`;
-        // }
       })
       .catch((err) => {
         console.log(err);

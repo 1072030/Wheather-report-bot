@@ -1,6 +1,6 @@
 const firestore = require("../config/firebaseConfig");
 const client = require("../config/client");
-const beaconTypeText = async (source, replyToken) => {
+const beaconTypeBubble = async (source, replyToken) => {
   const firestoreData = await firestore.collection("BeaconTest").get();
   let data = [];
   firestoreData.forEach(async (doc) => {
@@ -10,9 +10,9 @@ const beaconTypeText = async (source, replyToken) => {
       });
     }
   });
-  await client.replyMessage(replyToken, {
-    type: "text",
-    text: data[0].text,
-  });
+  //   await client.replyMessage(replyToken, {
+  //     type: "text",
+  //     text: data[0].text,
+  //   });
 };
-module.exports = beaconTypeText;
+module.exports = beaconTypeBubble;

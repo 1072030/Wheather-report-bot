@@ -2,6 +2,7 @@ const line = require("@line/bot-sdk");
 const express = require("express");
 const handleEvent = require("./wook/handleEvent");
 const firestore = require("./config/firebaseConfig");
+const cors = require("cors");
 const config = {
   channelSecret: "b85d02c4583b0a223741ee0ea2e28c7c",
   channelAccessToken:
@@ -11,6 +12,10 @@ const client = new line.Client(config);
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+const corsOptions = {
+  origin: "*",
+};
+app.use(cors(corsOptions));
 app.use("/", express.static("public"));
 app.get("/", async (_, res) => {
   return res.status(200).json({
@@ -49,6 +54,8 @@ app.post("/beacon", async (req, res) => {
           .collection("BeaconTest")
           .doc(doc.id)
           .set(req.body);
+      } else if (req.body.type === "bubble") {
+        console.log(req.body.type);
       }
     }
   });

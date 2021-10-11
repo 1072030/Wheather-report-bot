@@ -15,6 +15,10 @@ const handleBeacon = async (source, replyToken) => {
           return;
         case "confirm":
           return beaconTypeConfirm(source, replyToken);
+        case "bubble":
+          return beaconTypeBubble(source, replyToken);
+        case "image_carousel":
+          return;
       }
     }
   });
