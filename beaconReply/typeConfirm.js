@@ -1,26 +1,15 @@
 const firestore = require("../config/firebaseConfig");
 const client = require("../config/client");
 const beaconTypeConfirm = async (source, replyToken) => {
-  console.log(typeof source.beacon.dm);
-  const firestoreData = firestore
-    .collection("BeaconTest")
-    .where("beaconId", "==", `${parseInt(source.beacon.dm)}`);
-  let data = [];
-  const observer = firestoreData.onSnapshot(
-    (querySnapshot) => {
-      console.log("querySnapshot", querySnapshot);
-      console.log(`Received query snapshot of size ${querySnapshot.size}`);
-      // ...
-    },
-    (err) => {
-      console.log(`Encountered error: ${err}`);
+  const firestoreData = await firestore.collection("BeaconTest").get();
+  const content = {};
+  firestoreData.forEach(async (doc) => {
+    if (doc.data().beaconId === source.beacon.dm) {
+      var { ...data } = doc.data();
+      content = data;
     }
-  );
-  // firestoreData.forEach(async (doc) => {
-  //   if (doc.data().BeaconId === parseInt(source.beacon.dm)) {
-
-  //   }
-  // });
+  });
+  console.log(content);
   await client.replyMessage(replyToken, {
     type: "template",
     altText: "this is a confirm template",

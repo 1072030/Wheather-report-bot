@@ -20,90 +20,91 @@
       integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
       crossorigin="anonymous"
     ></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
     <title>Document</title>
   </head>
   <body>
     <div class="container">
-       
-      
-        <div>
-              <label
-                >輸入 beacon hwid :
-                <input type="text" width="30rem" id="hwid" value="50">
-              </label>
-            </div>
-        <div>
-          <select id="Type"
-            class="form-select form-select-lg mb-3"
-            aria-label=".form-select-lg example"
-          >
-            <option selected value="text">文字</option>
-            <option value="image">圖片</option>
-            <option value="confirm">確認方塊</option>
-          </select>
-          <!-- 分割線 -->
-          <div style="width: 50%;">
-            <fieldset class="row mb-3" >
-              <legend class="col-form-label col-sm-2 pt-0">actionType</legend>
-              <div class="col-sm-10"id="actionType">
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="gridRadios"
-                    id="gridRadios1"
-                    value="text"
-                    checked
-                  />
-                  <label class="form-check-label" for="gridRadios1">
-                    文字
-                  </label>
-                </div>
-                <div class="form-check">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="gridRadios"
-                    id="gridRadios2"
-                    value="uri"
-                  />
-                  <label class="form-check-label" for="gridRadios2">
-                    網址
-                  </label>
-                </div>
+      <div>
+        <label
+          >輸入 beacon hwid :
+          <input type="text" width="30rem" id="hwid" value="38" />
+        </label>
+      </div>
+      <div>
+        <select
+          id="Type"
+          class="form-select form-select-lg mb-3"
+          aria-label=".form-select-lg example"
+        >
+          <option value="text">文字</option>
+          <option value="image">圖片</option>
+          <option value="confirm" selected>確認方塊</option>
+        </select>
+        <!-- 分割線 -->
+        <div style="width: 50%" id="confirmTemplate">
+          <div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="AltText"
+                  placeholder="altText"
+                />
+                <label for="AltText">AltText</label>
               </div>
-            </fieldset>
-            <!-- 分割線 -->
-            <div>
-              <div class="col-md">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="AltText"
-                    placeholder="altText"
-                  />
-                  <label for="AltText">AltText</label>
-                </div>
-              </div>
-            </div>
-            <!-- 分割線 -->
-            <div> 
-              <div class="col-md">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="contentText"
-                    placeholder="altText"
-                  />
-                  <label for="floatingInputGrid">contentText</label>
-                </div>
             </div>
           </div>
           <!-- 分割線 -->
-          <div> 
+          <div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="contentText"
+                  placeholder="altText"
+                />
+                <label for="floatingInputGrid">contentText</label>
+              </div>
+            </div>
+          </div>
+          <!-- 分割線 -->
+          <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-2 pt-0">
+              button1 actionType
+            </legend>
+            <div class="col-sm-10" id="actionType">
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gridRadios"
+                  id="gridRadios1"
+                  value="text"
+                  checked
+                />
+                <label class="form-check-label" for="gridRadios1"> 文字 </label>
+              </div>
+              <div class="form-check">
+                <input
+                  class="form-check-input"
+                  type="radio"
+                  name="gridRadios"
+                  id="gridRadios2"
+                  value="uri"
+                />
+                <label class="form-check-label" for="gridRadios2"> 網址 </label>
+              </div>
+            </div>
+          </fieldset>
+          <!-- 分割線 -->
+          <div>
             <div class="col-md">
               <div class="form-floating">
                 <input
@@ -114,42 +115,147 @@
                 />
                 <label for="floatingInputGrid">actionLabel</label>
               </div>
-          </div>
-        </div>
-        <!-- 分割線 -->
-        <div> 
-          <div class="col-md">
-            <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="actionText"
-                placeholder="actionLabel"
-              />
-              <label for="floatingInputGrid">actionText</label>
-            </div>
-        </div>
-        </div>
-        <!-- 分割線 -->
-        <div> 
-          <div class="col-md">
-            <div class="form-floating">
-              <input
-                type="text"
-                class="form-control"
-                id="actionUri"
-                placeholder="actionLabel"
-              />
-              <label for="floatingInputGrid">actionUri</label>
             </div>
           </div>
+          <!-- 分割線 -->
+          <div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="actionText"
+                  placeholder="actionLabel"
+                />
+                <label for="floatingInputGrid">actionText</label>
+              </div>
+            </div>
+          </div>
+          <!-- 分割線 -->
+          <div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="actionUri"
+                  placeholder="actionLabel"
+                  disabled
+                />
+                <label for="floatingInputGrid">actionUri</label>
+              </div>
+            </div>
+          </div>
+          <!-- 分割線 -->
+          <!-- 分割線 -->
+          <!-- 分割線 -->
+          <fieldset class="row mb-3">
+            <legend class="col-form-label col-sm-2 pt-0">
+              button2 actionType
+            </legend>
+            <div class="col-sm-10" id="actionType">
+              <div class="form-check">
+                <label class="form-check-label">
+                  文字
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gridRadios_btn2"
+                    id="gridRadios1_btn2"
+                    value="text"
+                    checked
+                  />
+                </label>
+              </div>
+              <div class="form-check">
+                <label class="form-check-label">
+                  網址
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="gridRadios_btn2"
+                    id="gridRadios2_btn2"
+                    value="uri"
+                  />
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <!-- 分割線 -->
+          <div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="actionLabel_btn2"
+                  placeholder="actionLabel"
+                />
+                <label for="floatingInputGrid">actionLabel</label>
+              </div>
+            </div>
+          </div>
+          <!-- 分割線 -->
+          <div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="actionText_btn2"
+                  placeholder="actionLabel"
+                />
+                <label for="floatingInputGrid">actionText</label>
+              </div>
+            </div>
+          </div>
+          <!-- 分割線 -->
+          <div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="actionUri_btn2"
+                  placeholder="actionLabel"
+                  disabled
+                />
+                <label for="floatingInputGrid">actionUri</label>
+              </div>
+            </div>
+          </div>
+          <!-- 分割線 -->
+
+          <div>
+            <button type="submit" class="updateBeacon">確認更改</button>
+            <span class="ReturnMessage"></span>
+          </div>
         </div>
-        <!-- 分割線 -->
+        <!-- endwith confirmTemplate -->
+        <div id="textTemplate" style="display: none">
+          <div>
+            <div class="col-md">
+              <div class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="TextMessage"
+                  placeholder="altText"
+                />
+                <label for="floatingInputGrid">TextMessage</label>
+              </div>
+            </div>
+          </div>
+          <!-- 分割線 -->
+          <div>
+            <button type="submit" class="updateBeacon">確認更改</button>
+          </div>
+          <span class="ReturnMessage"></span>
         </div>
-        <div>
-          <button type="submit" id="updateBeacon">確認更改</button>
-        </div>
-      
+        <!-- end with textTemplate -->
+        <div id="imageTemplate"></div>
+        <!-- end with imageTemplate -->
+      </div>
     </div>
   </body>
   <script src="./app.js"></script>
