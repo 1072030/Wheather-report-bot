@@ -1,7 +1,7 @@
 const firestore = require("../config/firebaseConfig");
 const client = require("../config/client");
 const beaconTypeConfirm = async (source, replyToken) => {
-  console.log(source.beacon.dm);
+  console.log(typeof source.beacon.dm);
   const firestoreData = firestore
     .collection("BeaconTest")
     .where("beaconId", "==", `${parseInt(source.beacon.dm)}`);
