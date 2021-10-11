@@ -22,12 +22,9 @@ app.get("/", async (_, res) => {
 app.post("/beacon", async (req, res) => {
   const firestoreData = await firestore.collection("BeaconTest").get();
   firestoreData.forEach(async (doc) => {
-    if (doc.data().BeaconId === req.body.hwid) {
-      // await firestore
-      //   .collection("BeaconTest")
-      //   .doc(doc.id)
-      //   .update({ city: data[0] });
-    }
+    // if (doc.data().beaconId === req.body.hwid) {
+    //   await firestore.collection("BeaconTest").doc(doc.id).update(data);
+    // }
   });
   return res.status(200).json({
     status: "success",

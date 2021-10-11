@@ -1,13 +1,16 @@
 const firestore = require("../config/firebaseConfig");
 const client = require("../config/client");
 const beaconTypeConfirm = async (source, replyToken) => {
-  const firestoreData = await firestore.collection("BeaconTest").get();
+  const firestoreData = await firestore
+    .collection("BeaconTest")
+    .where("beaconId", "==", `${parseInt(source.beacon.dm)}`);
   let data = [];
-  firestoreData.forEach(async (doc) => {
-    if (doc.data().BeaconId === parseInt(source.beacon.dm)) {
-      //data.push({});
-    }
-  });
+  console.log(firestoreData);
+  // firestoreData.forEach(async (doc) => {
+  //   if (doc.data().BeaconId === parseInt(source.beacon.dm)) {
+
+  //   }
+  // });
   await client.replyMessage(replyToken, {
     type: "template",
     altText: "this is a confirm template",

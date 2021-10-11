@@ -2,6 +2,7 @@ $(document).ready(() => {
   $("#updateBeacon").click(async () => {
     let uri = `beacon`;
     let data = {
+      hwid: document.getElementById("hwid").value,
       type: $("#Type option:selected").val(),
       actionType: $("[name=gridRadios]:checked").val(),
       altText: document.getElementById("AltText").value,
