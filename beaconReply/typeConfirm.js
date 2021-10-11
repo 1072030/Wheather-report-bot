@@ -5,7 +5,16 @@ const beaconTypeConfirm = async (source, replyToken) => {
     .collection("BeaconTest")
     .where("beaconId", "==", `${parseInt(source.beacon.dm)}`);
   let data = [];
-  console.log(firestoreData);
+  const observer = firestoreData.onSnapshot(
+    (querySnapshot) => {
+      console.log("querySnapshot", querySnapshot);
+      console.log(`Received query snapshot of size ${querySnapshot.size}`);
+      // ...
+    },
+    (err) => {
+      console.log(`Encountered error: ${err}`);
+    }
+  );
   // firestoreData.forEach(async (doc) => {
   //   if (doc.data().BeaconId === parseInt(source.beacon.dm)) {
 
