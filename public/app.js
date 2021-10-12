@@ -33,30 +33,44 @@ $(document).ready(() => {
     }
   });
   $("#numberOfPicture").click(() => {
-    const number = parseInt($("#numberOfPicture option:selected").val());
-    console.log(number);
-  });
-  $(".replyMessageType").click(() => {
-    var index = $(".replyMessageType").index();
-    console.log($(".replyMessageType").val());
-    if (
-      $("#imageCarouselTemplate").find(".replyMessageType").get(index).value ==
-      "text"
-    ) {
-      $("#imageCarouselTemplate").find(".action_textReply")[
-        index
-      ].style.display = "block";
-      $("#imageCarouselTemplate").find(".action_UriReply")[
-        index
-      ].style.display = "none";
-    } else if ($(".replyMessageType").get(index).value == "uri") {
-      $("#imageCarouselTemplate").find(".action_textReply")[
-        index
-      ].style.display = "none";
-      $("#imageCarouselTemplate").find(".action_UriReply")[
-        index
-      ].style.display = "block";
+    const number = $("#numberOfPicture option:selected").val();
+    if (number == "1") {
+      DisplayShow("#block1");
+      DisplayHide("#block2");
+      DisplayHide("#block3");
+      DisplayHide("#block4");
+    } else if (number == "2") {
+      DisplayShow("#block2");
+      DisplayHide("#block3");
+      DisplayHide("#block4");
+    } else if (number == "3") {
+      DisplayShow("#block3");
+      DisplayHide("#block4");
+    } else {
+      DisplayShow("#block4");
     }
+  });
+  $(".replyMessageType").each((i, n) => {
+    $(n).on("click", () => {
+      console.log(i);
+      if (
+        $("#imageCarouselTemplate").find(".replyMessageType").get(i).value ==
+        "text"
+      ) {
+        $("#imageCarouselTemplate").find(".action_textReply")[i].style.display =
+          "block";
+        $("#imageCarouselTemplate").find(".action_UriReply")[i].style.display =
+          "none";
+      } else if (
+        $("#imageCarouselTemplate").find(".replyMessageType").get(i).value ==
+        "uri"
+      ) {
+        $("#imageCarouselTemplate").find(".action_textReply")[i].style.display =
+          "none";
+        $("#imageCarouselTemplate").find(".action_UriReply")[i].style.display =
+          "block";
+      }
+    });
   });
 
   $("[name=gridRadios_btn2]").click(() => {

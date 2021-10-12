@@ -44,7 +44,7 @@
           <option value="text">文字</option>
           <option value="image">圖片</option>
           <option value="confirm" selected>確認方塊</option>
-          <option value="bubble">對話框訊息</option>
+          <!-- <option value="bubble">對話框訊息</option> -->
           <option value="imageCarousel">圖片輪播訊息</option>
         </select>
         <!-- 分割線 -->
@@ -270,12 +270,6 @@
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
               </select>
             </label>
           </div>
@@ -291,7 +285,7 @@
             </div>
           </div>
           <!-- 分割線 -->
-          <div class="block">
+          <div id="block1">
             <div style="font-size: 2rem">第一格</div>
 
             <!-- 分割線 -->
@@ -361,8 +355,80 @@
               </div>
               <!-- 分割線 -->
             </div>
-            <div style="font-size: 2rem">第一格</div>
-
+            <div id="block2" style="display: none">
+              <div style="font-size: 2rem">第二格</div>
+              <!-- 分割線 -->
+              <div class="input-group mb-3">
+                <label class="input-group-text" for="inputGroupFile"
+                  >圖片預覽圖</label
+                >
+                <input type="file" class="form-control inputGroupFile" />
+              </div>
+              <!-- 分割線 -->
+              <div class="input-group mb-3">
+                <label class="input-group-text"
+                  >選擇回傳訊息 :
+                  <select class="form-select replyMessageType">
+                    <option value="text" selected>文字</option>
+                    <option value="uri">連結</option>
+                  </select>
+                </label>
+              </div>
+              <!-- 分割線 -->
+              <div class="action_textReply">
+                <div class="col-md">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control imageCarousel_label"
+                      placeholder="altText"
+                    />
+                    <label>圖片上顯示訊息</label>
+                  </div>
+                </div>
+                <!-- 分割線 -->
+                <div class="col-md">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control imageCarousel_text"
+                      placeholder="altText"
+                    />
+                    <label>回傳訊息</label>
+                  </div>
+                </div>
+              </div>
+              <!-- 分割線 -->
+              <div class="action_UriReply" style="display: none">
+                <div class="col-md">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control imageCarousel_label"
+                      placeholder="altText"
+                    />
+                    <label>圖片上顯示訊息</label>
+                  </div>
+                </div>
+                <!-- 分割線 -->
+                <div class="col-md">
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      class="form-control imageCarousel_label"
+                      placeholder="altText"
+                      value="https://"
+                    />
+                    <label>連結網址</label>
+                  </div>
+                </div>
+                <!-- 分割線 -->
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div id="block3" style="display: none">
+            <div style="font-size: 2rem">第三格</div>
             <!-- 分割線 -->
             <div class="input-group mb-3">
               <label class="input-group-text" for="inputGroupFile"
@@ -431,6 +497,79 @@
               <!-- 分割線 -->
             </div>
           </div>
+
+          <!--  -->
+          <div id="block4" style="display: none">
+            <div style="font-size: 2rem">第四格</div>
+            <!-- 分割線 -->
+            <div class="input-group mb-3">
+              <label class="input-group-text" for="inputGroupFile"
+                >圖片預覽圖</label
+              >
+              <input type="file" class="form-control inputGroupFile" />
+            </div>
+            <!-- 分割線 -->
+            <div class="input-group mb-3">
+              <label class="input-group-text"
+                >選擇回傳訊息 :
+                <select class="form-select replyMessageType">
+                  <option value="text" selected>文字</option>
+                  <option value="uri">連結</option>
+                </select>
+              </label>
+            </div>
+            <!-- 分割線 -->
+            <div class="action_textReply">
+              <div class="col-md">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control imageCarousel_label"
+                    placeholder="altText"
+                  />
+                  <label>圖片上顯示訊息</label>
+                </div>
+              </div>
+              <!-- 分割線 -->
+              <div class="col-md">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control imageCarousel_text"
+                    placeholder="altText"
+                  />
+                  <label>回傳訊息</label>
+                </div>
+              </div>
+            </div>
+            <!-- 分割線 -->
+            <div class="action_UriReply" style="display: none">
+              <div class="col-md">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control imageCarousel_label"
+                    placeholder="altText"
+                  />
+                  <label>圖片上顯示訊息</label>
+                </div>
+              </div>
+              <!-- 分割線 -->
+              <div class="col-md">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    class="form-control imageCarousel_label"
+                    placeholder="altText"
+                    value="https://"
+                  />
+                  <label>連結網址</label>
+                </div>
+              </div>
+              <!-- 分割線 -->
+            </div>
+          </div>
+          <div></div>
           <div>
             <button type="submit" class="updateBeacon">確認更改</button>
           </div>
