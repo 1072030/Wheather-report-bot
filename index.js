@@ -18,9 +18,9 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use("/", express.static("public"));
 app.get("/", async (_, res) => {
-  return res.status(200).json({
+  res.send({
     status: "success",
-    message: "Connected successfully!",
+    message: "Connect Successful",
   });
 });
 app.post("/callback", (req, res) => {
