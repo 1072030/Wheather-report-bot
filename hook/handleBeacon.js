@@ -1,5 +1,5 @@
 const client = require("../config/client");
-
+const { FlexSendMessage } = require("@line/bot-sdk");
 const handleBeacon = async (event, replyToken) => {
   await client.replyMessage(replyToken, FlexSendMessage("Text"), {
     hero: {
