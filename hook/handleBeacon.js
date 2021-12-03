@@ -3,6 +3,7 @@ const client = require("../config/client");
 const handleBeacon = async (event, replyToken) => {
   await client.replyMessage(replyToken, {
     type: "flex",
+    altText: "This is a Flex Message",
     contents: [
       {
         hero: {
