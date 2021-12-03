@@ -1,6 +1,6 @@
 const client = require("../config/client");
-const handleLocation = require("../wook/handleLocation");
-const handleText = require("../wook/handleText");
+const handleLocation = require("./handleLocation");
+const handleText = require("./handleText");
 const handleBeacon = require("./handleBeacon");
 const handleEvent = async (event) => {
   if (event.replyToken && event.replyToken.match(/^(.)\1*$/)) {

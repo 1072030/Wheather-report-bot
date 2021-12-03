@@ -1,6 +1,6 @@
 const line = require("@line/bot-sdk");
 const express = require("express");
-const handleEvent = require("./wook/handleEvent");
+const handleEvent = require("./hook/handleEvent");
 const firestore = require("./config/firebaseConfig");
 const cors = require("cors");
 const config = {
@@ -23,48 +23,6 @@ app.get("/", async (_, res) => {
     message: "Connected successfully!",
   });
 });
-
-app.post("/beacon", async (req, res) => {
-  const firestoreData = await firestore.collection("BeaconTest").get();
-
-  firestoreData.forEach(async (doc) => {
-    if (doc.data().beaconId === req.body.beaconId) {
-      if (req.body.type === "confirm") {
-        const update = await firestore
-          .collection("BeaconTest")
-          .doc(doc.id)
-          .set({
-            beaconId: req.body.beaconId,
-            type: req.body.type,
-            altText: req.body.altText,
-            contentText: req.body.contentText,
-
-            confirmType: req.body.confirmType,
-            confirmLabel: req.body.confirmLabel,
-            confirmText: req.body.confirmText,
-            confirmUri: req.body.confirmUri,
-
-            denyType: req.body.denyType,
-            denyLabel: req.body.denyLabel,
-            denyText: req.body.denyText,
-            denyUri: req.body.denyUri,
-          });
-      } else if (req.body.type === "text") {
-        const update = await firestore
-          .collection("BeaconTest")
-          .doc(doc.id)
-          .set(req.body);
-      } else if (req.body.type === "bubble") {
-        console.log(req.body.type);
-      }
-    }
-  });
-  return res.status(200).send({
-    status: "success",
-    message: "Success Update Beacon",
-  });
-});
-
 app.post("/callback", (req, res) => {
   Promise.all(req.body.events.map(handleEvent))
     .then(() => res.end())
