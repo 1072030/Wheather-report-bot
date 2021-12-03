@@ -3,32 +3,26 @@ const client = require("../config/client");
 const handleBeacon = async (event, replyToken) => {
   await client.replyMessage(replyToken, {
     type: "template",
-    altText: "this is a image carousel template",
+    altText: "this is an image carousel template",
     template: {
       type: "image_carousel",
       columns: [
         {
-          imageUrl: "https://example.com/bot/images/item1.jpg",
-          action: {
-            type: "postback",
-            label: "Buy",
-            data: "action=buy&itemid=111",
-          },
-        },
-        {
-          imageUrl: "https://example.com/bot/images/item2.jpg",
+          imageUrl:
+            "https://aws-uploade-image-test2.s3.amazonaws.com/0ei9wdytys9324fyqxh2dk.png",
           action: {
             type: "message",
-            label: "Yes",
-            text: "yes",
+            label: "動作 1",
+            text: "動作 1",
           },
         },
         {
-          imageUrl: "https://example.com/bot/images/item3.jpg",
+          imageUrl:
+            "https://aws-uploade-image-test2.s3.amazonaws.com/0ei9wdytys9324fyqxh2dk.png",
           action: {
-            type: "uri",
-            label: "View detail",
-            uri: "http://example.com/page/222",
+            type: "message",
+            label: "動作 2",
+            text: "動作 2",
           },
         },
       ],
